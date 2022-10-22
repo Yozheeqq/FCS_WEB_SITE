@@ -12,12 +12,12 @@ namespace FCS_WebSite.Controllers
         {
             _logger = logger;
         }
-
+        [RequireHttps]
         public IActionResult Index()
         {
             return View();
         }
-
+        [RequireHttps]
         public IActionResult Privacy()
         {
             return View();

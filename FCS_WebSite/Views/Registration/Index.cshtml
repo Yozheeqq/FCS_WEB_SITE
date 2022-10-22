@@ -1,0 +1,51 @@
+﻿@{
+    ViewData["Title"] = "Registration";
+}
+
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <link rel="stylesheet" href="~/css/registration.css"/>
+</head>
+<body>
+    <div class="block_of_buttons">
+        <button class="button" id="first">
+            Войти
+        </button>
+        <button class="button" id="second">
+            Зарегистрироваться
+        </button>
+    </div>
+
+    <div class="modal fade" id="popup">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                @using(Html.BeginForm("Pupil", "Registration", FormMethod.Post))
+                {
+                    <button>
+                        Как ученик
+                     </button>
+                }
+                @using(Html.BeginForm("Teacher", "Registration", FormMethod.Post))
+                {
+                    <button>
+                        Как преподаватель
+                     </button>
+                }
+            </div>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
+
+    </script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+            
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#second").click(function() {
+                $("#popup").modal("show");
+            });
+        })
+    </script>
+</body>
+</html>
