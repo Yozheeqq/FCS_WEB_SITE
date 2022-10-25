@@ -8,6 +8,24 @@ namespace FCS_WebSite.Controllers
 {
     public class RegistrationController : Controller
     {
+        public RegistrationController(JsonPupil pupil, JsonTeacher teacher)
+        {
+            _pupilJson = pupil;
+            _teacherJson = teacher;
+        }
+
+        private JsonPupil _pupilJson
+        {
+            set;
+            get;
+        }
+
+        private JsonTeacher _teacherJson
+        {
+            set;
+            get;
+        }
+
         [RequireHttps]
         public IActionResult Index()
         {
@@ -22,7 +40,15 @@ namespace FCS_WebSite.Controllers
         }
 
         [HttpPost]
-        public IActionResult RegistrationPupil(string email, string password, string passwordConfirm)
+        public IActionResult Teacher()
+        {
+
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult RegistrationPupil(string firstName, string lastName, 
+            string email, string password, string passwordConfirm, FormCollection fc)
         {
             if(password != passwordConfirm)
             {
@@ -32,21 +58,29 @@ namespace FCS_WebSite.Controllers
             {
                 Email = email,
                 Password = password,
-                LastName = "Khasanov",
-                FirstName = "Anvar",
+                LastName = lastName,
+                FirstName = firstName,
                 Id = 0
             };
-            using (StreamWriter sw = new StreamWriter(@"C:\Users\anvar\Desktop\study\output.txt"))
-            {
-                sw.Write(JsonSerializer.Serialize(pupil));
-            }
+            
+            _pupilJson.WritePerson(pupil);
             return Ok();
         }
 
-        [HttpPost]
-        public IActionResult Teacher()
+        [HttpGet]
+        public IActionResult RegistrationTeacher(string firstName, string lastName,
+            string email, string password, string passwordConfirm, string selfCode)
         {
-            return View();
+            Teacher teacher = new Teacher
+            {
+                FirstName = firstName,
+                LastName = lastName,
+                Email = email,
+                Password = password,
+                Code = selfCode
+            };
+            _teacherJson.WritePerson(teacher);
+            return Ok();
         }
     }
 }

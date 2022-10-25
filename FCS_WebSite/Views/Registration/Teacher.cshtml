@@ -1,14 +1,28 @@
 ﻿@{
     ViewData["Title"] = "Teacher";
 }
-
 <head>
-    <link rel="stylesheet" href=""/>
+    <link rel="stylesheet" href="~/css/teacher.css"/>
 </head>
 <body>
-    <div>
-        <h1>
-            Teacher
-        </h1>
+    @using (Html.BeginForm("RegistrationTeacher", "Registration", FormMethod.Get))
+    {
+        <div>
+        <input class="inputData" type="text" id="firstName" name="firstName"
+            placeholder="Имя" maxlength="16"/>
+        <input class="inputData" type="text" id="lastName" name="lastName"
+            placeholder="Фамилия" maxlength="16"/>
+        <input class="inputData" type="email" id="email" name="email"
+            placeholder="Почта" maxlength="16"/>
+        <input class="inputData" type="password" id="password" name="password"
+            placeholder="Пароль" maxlength="16"/>
+        <input class="inputData" type="password" id="passwordConfirm" name="passwordConfirm"
+            placeholder="Подтвердите пароль" maxlength="16"/>
+        <input class="inputData" type="text" id="selfCode" name="selfCode"
+            style="text-transform:uppercase" placeholder="Личный код" maxlength="6"/>
+        <button class="inputData">
+            Зарегистрироваться
+        </button>
     </div>
+    }
 </body>

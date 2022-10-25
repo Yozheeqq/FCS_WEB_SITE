@@ -1,7 +1,10 @@
 ﻿namespace FCS_WebSite.Models
 {
-    public class Pupil
+    public class Pupil : IPersonable
     {
+        private static int s_id = 0;
+        private int id = 0;
+
         public string? Email
         {
             set; get;
@@ -21,7 +24,11 @@
         }
         public int Id
         {
-            set; get;
+            set
+            {
+                id = s_id++;
+            }
+            get => id;
         }
     }
 }
