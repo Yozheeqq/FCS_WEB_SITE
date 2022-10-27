@@ -1,0 +1,46 @@
+﻿@{
+    ViewData["Title"] = "Registration";
+}
+<head>
+    <link rel="stylesheet" href="~/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/registration.css" />
+    
+</head>
+<body>
+    <div class="block_of_buttons">
+        <button class="button" id="first">
+            Войти
+        </button>  
+        <button type="button" class="button" data-toggle="modal"
+                data-target="#popup" id="second">
+            Зарегистрироваться
+        </button>
+    </div>
+
+    <div class="modal fade" id="popup">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                @using (Html.BeginForm("Pupil", "Registration", FormMethod.Post))
+                {
+                    <button>
+                        Как ученик
+                    </button>
+                }
+                @using (Html.BeginForm("Teacher", "Registration", FormMethod.Post))
+                {
+                    <button>
+                        Как преподаватель
+                    </button>
+                }
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="~/bootstrap/js/bootstrap.min.js"></script>
+</body>
+
+
+
+
