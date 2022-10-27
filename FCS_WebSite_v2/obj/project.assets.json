@@ -2466,6 +2466,7 @@
   "projectFileDependencyGroups": {
     "net6.0": [
       "Angular.UI.Bootstrap >= 2.5.0",
+      "Microsoft.AspNetCore.Cryptography.KeyDerivation >= 6.0.10",
       "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore >= 6.0.10",
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 6.0.10",
       "Microsoft.AspNetCore.Identity.UI >= 6.0.10",
@@ -2479,11 +2480,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\anvar\\Desktop\\study\\2Grade\\FCS_WebSiteNew\\FCS_WebSite_v2\\FCS_WebSite_v2\\FCS_WebSite_v2.csproj",
+      "projectUniqueName": "C:\\Users\\anvar\\Documents\\GitHub\\FCS_WEB_SITE\\FCS_WebSite_v2\\FCS_WebSite_v2.csproj",
       "projectName": "FCS_WebSite_v2",
-      "projectPath": "C:\\Users\\anvar\\Desktop\\study\\2Grade\\FCS_WebSiteNew\\FCS_WebSite_v2\\FCS_WebSite_v2\\FCS_WebSite_v2.csproj",
+      "projectPath": "C:\\Users\\anvar\\Documents\\GitHub\\FCS_WEB_SITE\\FCS_WebSite_v2\\FCS_WebSite_v2.csproj",
       "packagesPath": "C:\\Users\\anvar\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\anvar\\Desktop\\study\\2Grade\\FCS_WebSiteNew\\FCS_WebSite_v2\\FCS_WebSite_v2\\obj\\",
+      "outputPath": "C:\\Users\\anvar\\Documents\\GitHub\\FCS_WEB_SITE\\FCS_WebSite_v2\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\anvar\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -2515,6 +2516,10 @@
           "Angular.UI.Bootstrap": {
             "target": "Package",
             "version": "[2.5.0, )"
+          },
+          "Microsoft.AspNetCore.Cryptography.KeyDerivation": {
+            "target": "Package",
+            "version": "[6.0.10, )"
           },
           "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": {
             "target": "Package",

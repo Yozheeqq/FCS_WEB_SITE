@@ -2,7 +2,7 @@
 {
     public class Pupil : IPersonable
     {
-        private static int s_id = 0;
+        public static int s_id = 0;
         private int id = 0;
 
         public string? Email

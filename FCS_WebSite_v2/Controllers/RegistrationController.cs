@@ -3,6 +3,7 @@ using System.IO;
 using FCS_WebSite.Models;
 using FCS_WebSite.Services;
 using System.Text.Json;
+using FCS_WebSite_v2.Services;
 
 namespace FCS_WebSite.Controllers
 {
@@ -46,25 +47,17 @@ namespace FCS_WebSite.Controllers
         }
 
         [HttpPost]
-        public IActionResult RegistrationPupil(IFormCollection fc)
+        public IActionResult RegistrationPupil(IFormCollection pupilData)
         {
-            // string firstName, string lastName, 
-            // string email, string password, string passwordConfirm,
-            /*
-            if (password != passwordConfirm)
-            {
-                return View("Error");
-            }
             Pupil pupil = new Pupil
             {
-                Email = email,
-                Password = password,
-                LastName = lastName,
-                FirstName = firstName,
-                Id = 0
-            };
-            
-            _pupilJson.WritePerson(pupil);*/
+                Email = pupilData["email"],
+                Password = Hasher.Hash(pupilData["password"]),
+                LastName = pupilData["lastName"],
+                FirstName = pupilData["firstName"],
+                Id = ++Models.Pupil.s_id
+        };
+
             return Ok();
         }
 

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "dihIjj1kC6FwI/zlhUIp15rkHwZNzNKkGDkjm5mLSeWpmZH8tSexW15kM2PcXVaJIUiU7hE1RbGKBm0E6rEfOQ==",
+  "dgSpecHash": "+TZABX/kXuKPIjYr2/ba50YI+PXYtKAVZa09Ufnf+TJ8gulH4Eagj+upLSU9F1vw5YLGLKarbkfq9XoVXYUcrg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\anvar\\Desktop\\study\\2Grade\\FCS_WebSiteNew\\FCS_WebSite_v2\\FCS_WebSite_v2\\FCS_WebSite_v2.csproj",
+  "projectFilePath": "C:\\Users\\anvar\\Documents\\GitHub\\FCS_WEB_SITE\\FCS_WebSite_v2\\FCS_WebSite_v2.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\anvar\\.nuget\\packages\\angular.ui.bootstrap\\2.5.0\\angular.ui.bootstrap.2.5.0.nupkg.sha512",
     "C:\\Users\\anvar\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
