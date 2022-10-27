@@ -1,4 +1,6 @@
-﻿namespace FCS_WebSite.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace FCS_WebSite.Models
 {
     public class Pupil : IPersonable
     {

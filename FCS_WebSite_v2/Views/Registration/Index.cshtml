@@ -4,17 +4,21 @@
 <head>
     <link rel="stylesheet" href="~/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="~/css/registration.css" />
-    
+
 </head>
 <body>
     <div class="block_of_buttons">
-        <button class="button" id="first">
-            Войти
-        </button>  
-        <button type="button" class="button" data-toggle="modal"
+        @using (Html.BeginForm("Index", "LogIn"))
+        {
+            <button class="button" id="first">
+                Войти
+            </button>
+        }
+            <button type="button" class="button" data-toggle="modal"
                 data-target="#popup" id="second">
-            Зарегистрироваться
-        </button>
+                Зарегистрироваться
+            </button>
+
     </div>
 
     <div class="modal fade" id="popup">

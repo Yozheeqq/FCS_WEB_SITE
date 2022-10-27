@@ -1,4 +1,5 @@
 ﻿using FCS_WebSite.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace FCS_WebSite_v2.Data.DB
 {
@@ -19,6 +20,11 @@ namespace FCS_WebSite_v2.Data.DB
         public static void InitialTeacher(Teacher teacher)
         {
             Content.Teacher.Add(teacher);
+        }
+
+        public static DbSet<Pupil> GetPupil()
+        {
+            return Content.Pupil;
         }
     }
 }

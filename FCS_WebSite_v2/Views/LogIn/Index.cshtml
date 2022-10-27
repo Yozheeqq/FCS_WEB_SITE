@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="~/css/login.css" />
 </head>
 <body>
-    @using(Html.BeginForm("CheckCorrect", "LogIn", FormMethod.Get))
+    @using(Html.BeginForm("LogIn", "LogIn", FormMethod.Post))
     {
         <div>
             <input class="inputField" type="email" name="email" placeholder="Почта"/>
