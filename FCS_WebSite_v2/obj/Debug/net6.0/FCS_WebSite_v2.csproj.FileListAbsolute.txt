@@ -140,3 +140,4 @@ C:\Users\anvar\Documents\GitHub\FCS_WEB_SITE\FCS_WebSite_v2\obj\Debug\net6.0\ref
 C:\Users\anvar\Documents\GitHub\FCS_WEB_SITE\FCS_WebSite_v2\obj\Debug\net6.0\FCS_WebSite_v2.pdb
 C:\Users\anvar\Documents\GitHub\FCS_WEB_SITE\FCS_WebSite_v2\obj\Debug\net6.0\FCS_WebSite_v2.genruntimeconfig.cache
 C:\Users\anvar\Documents\GitHub\FCS_WEB_SITE\FCS_WebSite_v2\obj\Debug\net6.0\ref\FCS_WebSite_v2.dll
+C:\Users\anvar\Documents\GitHub\FCS_WEB_SITE\FCS_WebSite_v2\bin\Debug\net6.0\Data\DB\dbsettings.json

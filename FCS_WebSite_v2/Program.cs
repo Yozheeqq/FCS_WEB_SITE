@@ -56,4 +56,8 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Registration}/{action=Index}/{id?}"); // Вернуть на Home
 
+
+var scope = app.Services.CreateScope();
+DBObjects.Content = scope.ServiceProvider.GetRequiredService<DBContent>();
+
 app.Run();

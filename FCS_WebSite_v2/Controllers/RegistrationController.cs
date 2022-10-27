@@ -4,27 +4,14 @@ using FCS_WebSite.Models;
 using FCS_WebSite.Services;
 using System.Text.Json;
 using FCS_WebSite_v2.Services;
+using FCS_WebSite_v2.Data.DB;
 
 namespace FCS_WebSite.Controllers
 {
     public class RegistrationController : Controller
     {
-        public RegistrationController(JsonPupil pupil, JsonTeacher teacher)
+        public RegistrationController()
         {
-            _pupilJson = pupil;
-            _teacherJson = teacher;
-        }
-
-        private JsonPupil _pupilJson
-        {
-            set;
-            get;
-        }
-
-        private JsonTeacher _teacherJson
-        {
-            set;
-            get;
         }
 
         [RequireHttps]
@@ -55,9 +42,9 @@ namespace FCS_WebSite.Controllers
                 Password = Hasher.Hash(pupilData["password"]),
                 LastName = pupilData["lastName"],
                 FirstName = pupilData["firstName"],
-                Id = ++Models.Pupil.s_id
-        };
-
+                //Id = ++Models.Pupil.s_id
+            };
+            DBObjects.InitialPupil(pupil);
             return Ok();
         }
 
@@ -73,7 +60,7 @@ namespace FCS_WebSite.Controllers
                 Password = password,
                 Code = selfCode
             };
-            _teacherJson.WritePerson(teacher);
+            DBObjects.InitialTeacher(teacher);
             return Ok();
         }
     }

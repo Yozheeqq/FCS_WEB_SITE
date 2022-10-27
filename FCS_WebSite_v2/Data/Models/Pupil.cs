@@ -3,7 +3,6 @@
     public class Pupil : IPersonable
     {
         public static int s_id = 0;
-        private int id = 0;
 
         public string? Email
         {
@@ -24,11 +23,7 @@
         }
         public int Id
         {
-            set
-            {
-                id = s_id++;
-            }
-            get => id;
+            set; get;
         }
     }
 }
