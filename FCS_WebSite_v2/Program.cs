@@ -1,9 +1,16 @@
 using FCS_WebSite.Services;
 using FCS_WebSite_v2.Data;
+using FCS_WebSite_v2.Data.DB;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Root of DB configuration
+IConfigurationRoot confRoot = new ConfigurationBuilder().SetBasePath(
+    builder.Environment.ContentRootPath).AddJsonFile("Data/DB/dbsettings.json").Build();
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
@@ -17,8 +24,12 @@ builder.Services.AddRazorPages();
 builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<JsonPupil>();
 builder.Services.AddTransient<JsonTeacher>();
+// Add Sql Connection
+builder.Services.AddDbContext<DBContent>(options =>
+    options.UseSqlServer(confRoot.GetConnectionString("DefaultConnection")));
 
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
