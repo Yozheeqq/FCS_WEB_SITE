@@ -6,9 +6,9 @@ namespace FCS_WebSite_v2.Data.Repository
 {
     public class PupilRepository
     {
-        private readonly DBContent dBContent;
+        private readonly ApplicationDbContext dBContent;
 
-        public PupilRepository(DBContent dBContent)
+        public PupilRepository(ApplicationDbContext dBContent)
         {
             this.dBContent = dBContent;
         }
