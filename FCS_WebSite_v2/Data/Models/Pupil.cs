@@ -1,32 +1,15 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using FCS_WebSite_v2.Data.Models;
+using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
 
 namespace FCS_WebSite.Models
 {
     public class Pupil : IPersonable
     {
-        public static int s_id = 0;
-
-        public string? Email
-        {
-            set; get;
-        }
-
-        public string? Password
-        {
-            set; get;
-        }
-        public string? FirstName
-        {
-            set; get;
-        }
-        public string? LastName
-        {
-            set; get;
-        }
-        public int Id
-        {
-            set; get;
-        }
+        public int Id { set; get; }
+        public string? FirstName { get; set; }
+        public string? LastName { get; set; }
+        public string? Email { get; set; }
+        public string? Password { get; set; }
     }
 }

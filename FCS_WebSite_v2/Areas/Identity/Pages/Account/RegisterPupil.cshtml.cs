@@ -18,8 +18,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
-using FCS_WebSite_v2.Data.Models;
+//using FCS_WebSite_v2.Data.Models;
 using FCS_WebSite_v2.Data;
+using FCS_WebSite.Models;
+using FCS_WebSite_v2.Data.Models;
+using FCS_WebSite_v2.Services;
+using FCS_WebSite_v2.Data.DB;
 
 namespace FCS_WebSite_v2.Areas.Identity.Pages.Account
 {
@@ -78,7 +82,7 @@ namespace FCS_WebSite_v2.Areas.Identity.Pages.Account
             /// </summary>
             [Required]
             [EmailAddress]
-            [Display(Name = "Email")]
+            [Display(Name = "Почта")]
             public string Email { get; set; }
 
             /// <summary>
@@ -86,9 +90,8 @@ namespace FCS_WebSite_v2.Areas.Identity.Pages.Account
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
             [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
             [DataType(DataType.Password)]
-            [Display(Name = "Password")]
+            [Display(Name = "Пароль")]
             public string Password { get; set; }
 
             /// <summary>
@@ -96,9 +99,19 @@ namespace FCS_WebSite_v2.Areas.Identity.Pages.Account
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
             [DataType(DataType.Password)]
-            [Display(Name = "Confirm password")]
-            [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+            [Display(Name = "Подтвердите пароль")]
+            [Compare("Password", ErrorMessage = "Пароли не совпадают")]
             public string ConfirmPassword { get; set; }
+
+            [Required]
+            [DataType(DataType.Text)]
+            [Display(Name = "Имя")]
+            public string FirstName { get; set; }
+
+            [Required]
+            [DataType(DataType.Text)]
+            [Display(Name = "Фамилия")]
+            public string LastName { get; set; }
         }
 
 
@@ -118,12 +131,28 @@ namespace FCS_WebSite_v2.Areas.Identity.Pages.Account
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
+                var hashedPassword = Hasher.Hash(Input.Password);
                 var result = await _userManager.CreateAsync(user, Input.Password);
+                user.Email = Input.Email;
+                user.FirstName = Input.FirstName;
+                user.LastName = Input.LastName;
+                user.PasswordHash = hashedPassword;
+                
+
+                Pupil pupil = new Pupil()
+                {
+                    LastName = Input.LastName,
+                    FirstName = Input.FirstName,
+                    Email = Input.Email,
+                    Password = hashedPassword,
+                    Id = 0
+                };
 
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
                     await _userManager.AddToRoleAsync(user, Roles.Pupil.ToString());
+                    DBObjects.InitialPupil(pupil);
 
                     var userId = await _userManager.GetUserIdAsync(user);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);

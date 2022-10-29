@@ -11,6 +11,11 @@
     display: block;
 }
 
+.block_of_buttons {
+    height: 200px;
+    width: 100px;
+}
+
 #first{
     margin-bottom:30px;
     margin-left:auto;

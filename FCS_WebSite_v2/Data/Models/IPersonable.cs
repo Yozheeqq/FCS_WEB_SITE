@@ -1,4 +1,6 @@
-﻿namespace FCS_WebSite.Models
+﻿using Microsoft.AspNetCore.Identity;
+
+namespace FCS_WebSite.Models
 {
     public interface IPersonable
     {

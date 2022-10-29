@@ -1,12 +1,13 @@
 ﻿using FCS_WebSite.Models;
+using FCS_WebSite_v2.Data.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using FCS_WebSite_v2.Data.Models;
+//using FCS_WebSite_v2.Data.Models;
 
 namespace FCS_WebSite_v2.Data.DB
 {
-    public class ApplicationDbContext : IdentityDbContext<User>
+    public class ApplicationDbContext : IdentityDbContext
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -32,5 +33,6 @@ namespace FCS_WebSite_v2.Data.DB
 
         public DbSet<Pupil> Pupil { set; get; }
         public DbSet<Teacher> Teacher { set; get; }
+        public DbSet<User> User { set; get; }
     }
 }

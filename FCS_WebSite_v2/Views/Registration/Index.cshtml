@@ -38,29 +38,23 @@
         </div>
     </nav>
 
-    <div class="block_of_buttons">
-        @using (Html.BeginForm("Index", "LogIn"))
-        {
-            <button class="button" id="first">
-                Войти
-            </button>
-        }
-        <button type="button" class="button" data-toggle="modal"
-                data-target="#popup" id="second">
+    <nav class="block_of_buttons">
+        <a class="button nav-link text-dark" asp-area="Identity" asp-page="/Account/Login" 
+            id="first">
+            Войти
+        </a>
+        <a class="button nav-link text-dark" asp-area="Identity"
+            id=second data-toggle="modal" data-target="#popup">
             Зарегистрироваться
-        </button>
-
-    </div>
+        </a>
+    </nav>
 
     <div class="modal fade" id="popup">
         <div class="modal-dialog">
             <div class="modal-content">
-                @using (Html.BeginForm("Pupil", "Registration", FormMethod.Post))
-                {
-                    <button>
+                <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/RegisterPupil"> 
                         Как ученик
-                    </button>
-                }
+                </a>
                 @using (Html.BeginForm("Teacher", "Registration", FormMethod.Post))
                 {
                     <button>

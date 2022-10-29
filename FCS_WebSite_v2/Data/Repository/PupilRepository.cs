@@ -16,7 +16,7 @@ namespace FCS_WebSite_v2.Data.Repository
         public IEnumerable<Pupil> Pupils => dBContent.Pupil.Include(pupil => pupil.Id);
 
         public Pupil? GetObjPupil(int id) => 
-            dBContent.Pupil.FirstOrDefault(pupil => pupil.Id == id);
+            dBContent.Pupil.FirstOrDefault(pupil => pupil.Id.ToString() == id.ToString());
 
     }
 }

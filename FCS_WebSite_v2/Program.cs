@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using FCS_WebSite_v2.Data.Models;
 using FCS_WebSite_v2.Data;
+using FCS_WebSite.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -71,7 +72,7 @@ try
     var context = services.GetRequiredService<ApplicationDbContext>();
     var userManager = services.GetRequiredService<UserManager<User>>();
     var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
-    await ContextSeed.SeedRolesAsync(userManager, roleManager);
+    await ContextSeed.SeedRolesAsync(roleManager);
 }
 catch (Exception ex)
 {

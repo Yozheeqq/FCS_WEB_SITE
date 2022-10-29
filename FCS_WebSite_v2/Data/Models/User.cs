@@ -1,10 +1,11 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using FCS_WebSite.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace FCS_WebSite_v2.Data.Models
 {
     public class User : IdentityUser
     {
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
+        public string? FirstName { get; set; }
+        public string? LastName { get; set; }
     }
 }
