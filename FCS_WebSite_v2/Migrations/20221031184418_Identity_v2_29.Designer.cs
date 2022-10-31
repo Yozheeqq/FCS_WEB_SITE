@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FCS_WebSite_v2.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221029200219_Identity_v2_27")]
-    partial class Identity_v2_27
+    [Migration("20221031184418_Identity_v2_29")]
+    partial class Identity_v2_29
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -27,11 +27,8 @@ namespace FCS_WebSite_v2.Migrations
 
             modelBuilder.Entity("FCS_WebSite.Models.Pupil", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");

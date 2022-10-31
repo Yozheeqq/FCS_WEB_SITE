@@ -148,14 +148,13 @@ namespace FCS_WebSite_v2.Areas.Identity.Pages.Account
                 user.Email = Input.Email;
                 user.FirstName = Input.FirstName;
                 user.LastName = Input.LastName;
-                user.PasswordHash = hashedPassword;
 
                 Teacher teacher = new Teacher()
                 {
                     LastName = Input.LastName,
                     FirstName = Input.FirstName,
                     Email = Input.Email,
-                    Password = hashedPassword,
+                    Password = user.PasswordHash,
                     Code = Input.Code,
                     Id = user.Id
                 };

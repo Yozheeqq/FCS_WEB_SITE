@@ -6,7 +6,7 @@ namespace FCS_WebSite.Models
 {
     public class Pupil : IPersonable
     {
-        public int Id { set; get; }
+        public string? Id { set; get; }
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
         public string? Email { get; set; }

@@ -135,17 +135,15 @@ namespace FCS_WebSite_v2.Areas.Identity.Pages.Account
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 user.Email = Input.Email;
                 user.FirstName = Input.FirstName;
-                user.LastName = Input.LastName;
-                user.PasswordHash = hashedPassword;
-                
+                user.LastName = Input.LastName;              
 
                 Pupil pupil = new Pupil()
                 {
                     LastName = Input.LastName,
                     FirstName = Input.FirstName,
                     Email = Input.Email,
-                    Password = hashedPassword,
-                    Id = 0
+                    Password = user.PasswordHash,
+                    Id = user.Id
                 };
 
                 if (result.Succeeded)

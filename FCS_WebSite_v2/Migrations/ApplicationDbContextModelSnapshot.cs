@@ -25,11 +25,8 @@ namespace FCS_WebSite_v2.Migrations
 
             modelBuilder.Entity("FCS_WebSite.Models.Pupil", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");

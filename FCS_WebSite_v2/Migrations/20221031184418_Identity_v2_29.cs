@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace FCS_WebSite_v2.Migrations
 {
-    public partial class Identity_v2_27 : Migration
+    public partial class Identity_v2_29 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -17,8 +17,7 @@ namespace FCS_WebSite_v2.Migrations
                 schema: "Identity",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: true),

@@ -16,19 +16,16 @@ IConfigurationRoot confRoot = new ConfigurationBuilder().SetBasePath(
     builder.Environment.ContentRootPath).AddJsonFile("Data/DB/dbsettings.json").Build();
 
 // Add services to the container.
-//var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-//builder.Services.AddDbContext<ApplicationDbContext>(options =>
-//    options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-//builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-//    .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddRazorPages();
 builder.Services.AddControllersWithViews();
 
 // Add Sql Connection
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(confRoot.GetConnectionString("DefaultConnection")));
+
+// Add Identity
 builder.Services.AddIdentity<User, IdentityRole>().
         AddEntityFrameworkStores<ApplicationDbContext>().
         AddDefaultUI().AddDefaultTokenProviders();
