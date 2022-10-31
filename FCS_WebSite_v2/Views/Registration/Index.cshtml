@@ -53,14 +53,11 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/RegisterPupil"> 
-                        Как ученик
+                    Как ученик
                 </a>
-                @using (Html.BeginForm("Teacher", "Registration", FormMethod.Post))
-                {
-                    <button>
-                        Как преподаватель
-                    </button>
-                }
+                <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/RegisterTeacher">
+                    Как преподаватель
+                </a>       
             </div>
         </div>
     </div>

@@ -1,13 +1,29 @@
-﻿body {
-}
-
-.inputData {
-    margin-top: 20px;
+﻿.inputData {
+    margin-bottom: 20px;
     margin-left: auto;
     margin-right: auto;
     display: block
 }
 
-.inputData::placeholder{
-    text-transform:none
+.form {
+    margin-top: 100px;
+}
+
+.form-register {
+    margin-left: auto;
+    margin-right: auto;
+    width: 400px;
+}
+
+.row {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.heading {
+    text-align: center;
+}
+
+.code{
+    text-transform: uppercase;
 }

@@ -1,4 +1,4 @@
-п»ї// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 #nullable disable
 
@@ -27,20 +27,20 @@ using FCS_WebSite_v2.Data.DB;
 
 namespace FCS_WebSite_v2.Areas.Identity.Pages.Account
 {
-    public class RegisterPupilModel : PageModel
+    public class RegisterTeacherModel : PageModel
     {
         private readonly SignInManager<User> _signInManager;
         private readonly UserManager<User> _userManager;
         private readonly IUserStore<User> _userStore;
         private readonly IUserEmailStore<User> _emailStore;
-        private readonly ILogger<RegisterPupilModel> _logger;
+        private readonly ILogger<RegisterTeacherModel> _logger;
         private readonly IEmailSender _emailSender;
 
-        public RegisterPupilModel(
+        public RegisterTeacherModel(
             UserManager<User> userManager,
             IUserStore<User> userStore,
             SignInManager<User> signInManager,
-            ILogger<RegisterPupilModel> logger,
+            ILogger<RegisterTeacherModel> logger,
             IEmailSender emailSender)
         {
             _userManager = userManager;
@@ -82,7 +82,7 @@ namespace FCS_WebSite_v2.Areas.Identity.Pages.Account
             /// </summary>
             [Required]
             [EmailAddress]
-            [Display(Name = "РџРѕС‡С‚Р°")]
+            [Display(Name = "Почта")]
             public string Email { get; set; }
 
             /// <summary>
@@ -91,7 +91,7 @@ namespace FCS_WebSite_v2.Areas.Identity.Pages.Account
             /// </summary>
             [Required]
             [DataType(DataType.Password)]
-            [Display(Name = "РџР°СЂРѕР»СЊ")]
+            [Display(Name = "Пароль")]
             public string Password { get; set; }
 
             /// <summary>
@@ -99,19 +99,25 @@ namespace FCS_WebSite_v2.Areas.Identity.Pages.Account
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
             [DataType(DataType.Password)]
-            [Display(Name = "РџРѕРґС‚РІРµСЂРґРёС‚Рµ РїР°СЂРѕР»СЊ")]
-            [Compare("Password", ErrorMessage = "РџР°СЂРѕР»Рё РЅРµ СЃРѕРІРїР°РґР°СЋС‚")]
+            [Display(Name = "Подтвердите пароль")]
+            [Compare("Password", ErrorMessage = "Пароли не совпадают")]
             public string ConfirmPassword { get; set; }
 
             [Required]
             [DataType(DataType.Text)]
-            [Display(Name = "РРјСЏ")]
+            [Display(Name = "Имя")]
             public string FirstName { get; set; }
 
             [Required]
             [DataType(DataType.Text)]
-            [Display(Name = "Р¤Р°РјРёР»РёСЏ")]
+            [Display(Name = "Фамилия")]
             public string LastName { get; set; }
+
+            [Required]
+            [DataType(DataType.Text)]
+            [MaxLength(6)]
+            [Display(Name = "Ваш код")]
+            public string Code { get; set; }
         }
 
 
@@ -127,6 +133,12 @@ namespace FCS_WebSite_v2.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
+                if(!ValidateCode.Codes.Contains(Input.Code.ToUpper()))
+                {
+                    ModelState.AddModelError(string.Empty, "Такого кода не существует");
+                    return Page();
+                }
+
                 var user = CreateUser();
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
@@ -137,22 +149,22 @@ namespace FCS_WebSite_v2.Areas.Identity.Pages.Account
                 user.FirstName = Input.FirstName;
                 user.LastName = Input.LastName;
                 user.PasswordHash = hashedPassword;
-                
 
-                Pupil pupil = new Pupil()
+                Teacher teacher = new Teacher()
                 {
                     LastName = Input.LastName,
                     FirstName = Input.FirstName,
                     Email = Input.Email,
                     Password = hashedPassword,
-                    Id = 0
+                    Code = Input.Code,
+                    Id = user.Id
                 };
 
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
-                    await _userManager.AddToRoleAsync(user, Roles.Pupil.ToString());
-                    DBObjects.InitialPupil(pupil);
+                    await _userManager.AddToRoleAsync(user, Roles.Teacher.ToString());
+                    DBObjects.InitialTeacher(teacher);
 
                     var userId = await _userManager.GetUserIdAsync(user);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);

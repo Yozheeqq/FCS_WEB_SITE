@@ -1,8 +1,8 @@
 ﻿body {
-
 }
+
 .button {
-    margin-top: 225px;
+    margin: auto;
     background-color: #FFCC00;
     text-align: center;
     padding: 10px 40px;
@@ -12,16 +12,17 @@
 }
 
 .block_of_buttons {
+    margin: auto;
     height: 200px;
     width: 100px;
 }
 
-#first{
-    margin-bottom:30px;
-    margin-left:auto;
-    margin-right:auto;
+#first {
+    margin-bottom: 30px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-#second{
-    margin:auto;
+#second {
+    margin: auto;
 }
