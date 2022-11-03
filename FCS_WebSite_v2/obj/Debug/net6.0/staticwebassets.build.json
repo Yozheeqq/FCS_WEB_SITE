@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "fwaqhkss6tmzVEBpW9e/WitmYL8QVhZiTGfoo0Tabb4=",
+  "Hash": "FBUdkEhadmZchRxVy6MI7DZgmoqJWYt7cYu1N8drLmY=",
   "Source": "FCS_WebSite_v2",
   "BasePath": "_content/FCS_WebSite_v2",
   "Mode": "Default",
@@ -1137,6 +1137,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\bootstrap\\js\\bootstrap.min.js.map"
+    },
+    {
+      "Identity": "C:\\Users\\anvar\\Documents\\GitHub\\FCS_WEB_SITE\\FCS_WebSite_v2\\wwwroot\\css\\createForm.css",
+      "SourceId": "FCS_WebSite_v2",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\anvar\\Documents\\GitHub\\FCS_WEB_SITE\\FCS_WebSite_v2\\wwwroot\\",
+      "BasePath": "_content/FCS_WebSite_v2",
+      "RelativePath": "css/createForm.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\createForm.css"
     },
     {
       "Identity": "C:\\Users\\anvar\\Documents\\GitHub\\FCS_WEB_SITE\\FCS_WebSite_v2\\wwwroot\\css\\login.css",
