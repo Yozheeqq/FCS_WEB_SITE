@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "FBUdkEhadmZchRxVy6MI7DZgmoqJWYt7cYu1N8drLmY=",
+  "Hash": "vVcgnYNOjrR7SrYk8e5aWnxg237bSn9tVxVsbkqXCGI=",
   "Source": "FCS_WebSite_v2",
   "BasePath": "_content/FCS_WebSite_v2",
   "Mode": "Default",
@@ -1139,12 +1139,12 @@
       "OriginalItemSpec": "wwwroot\\bootstrap\\js\\bootstrap.min.js.map"
     },
     {
-      "Identity": "C:\\Users\\anvar\\Documents\\GitHub\\FCS_WEB_SITE\\FCS_WebSite_v2\\wwwroot\\css\\createForm.css",
+      "Identity": "C:\\Users\\anvar\\Documents\\GitHub\\FCS_WEB_SITE\\FCS_WebSite_v2\\wwwroot\\css\\form\\edit.css",
       "SourceId": "FCS_WebSite_v2",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\anvar\\Documents\\GitHub\\FCS_WEB_SITE\\FCS_WebSite_v2\\wwwroot\\",
       "BasePath": "_content/FCS_WebSite_v2",
-      "RelativePath": "css/createForm.css",
+      "RelativePath": "css/form/edit.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -1153,7 +1153,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\css\\createForm.css"
+      "OriginalItemSpec": "wwwroot\\css\\form\\edit.css"
     },
     {
       "Identity": "C:\\Users\\anvar\\Documents\\GitHub\\FCS_WEB_SITE\\FCS_WebSite_v2\\wwwroot\\css\\login.css",

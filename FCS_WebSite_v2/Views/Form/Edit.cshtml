@@ -12,9 +12,113 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/FCS_WebSite_v2.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="~/css/createForm.css" />
+    <link rel="stylesheet" href="~/css/form/edit.css" />
 </head>
 <body>
+    <div class="form">
+        <div class="heading">
+            <input type="text" name="formname" value="Название" />
+            <input type="checkbox" id="ifdate" name="ifdate" onclick="showDate()" />
+            <label for="ifdate">Установить дату</label>
+            <div class="date" id="date">
+                <input type="date" id="startDate" />
+                <input type="date" id="endDate" />
+            </div>
+        </div>
+        <div class="body">
+            <div class="questions" id="question">
+            </div>
+            <button id="addQuestion" type="button" name="addQuestion" onclick="addQuestion()">+</button>
+        </div>
+    </div>
+
+    <script>
+        function showDate() {
+            let checkbox = document.getElementById("ifdate");
+            let date = document.getElementById("date");
+            if (checkbox.checked) {
+                date.style.display = "block";
+            } else {
+                date.style.display = "none";
+            }
+        }
+
+        function addQuestion() {
+            let parent = document.getElementById("question");
+            let questionPlace = document.createElement("div");
+            questionPlace.id = "qp" + parent.childElementCount;
+            // ------questionName-----
+            let question = document.createElement("input");
+            question.type = "text";
+            question.placeholder = "Вопрос";
+            questionPlace.appendChild(question);
+            // ------select------
+            let questionType = document.createElement("select");
+            let temp = questionPlace.id;
+            //questionType.onchange = "changeQuestionType('12')";
+            let opt1 = document.createElement("option");
+            let opt2 = document.createElement("option");
+            let opt3 = document.createElement("option");
+            opt1.innerHTML = "Короткий ответ";
+            opt2.innerHTML = "Длинный ответ";
+            opt3.innerHTML = "Чекбокс";
+            questionType.appendChild(opt1);
+            questionType.appendChild(opt2);
+            questionType.appendChild(opt3);
+            questionType.onchange = function () {
+                let id = questionPlace.id;
+                let answerType = document.getElementById(id).children[1].value;
+                let answer = document.getElementById(id).children[2];
+                document.getElementById(id).removeChild(answer);
+                if (answerType == "Короткий ответ") {
+                    let input = document.createElement("input");
+                    input.type = "text";
+                    document.getElementById(id).appendChild(input);
+                } else if (answerType == "Длинный ответ") {
+                    let textArea = document.createElement("textArea");
+                    document.getElementById(id).appendChild(textArea);
+                } else if (answerType == "Чекбокс") {
+                    let input = document.createElement("input");
+                    input.type = "checkbox";
+                    document.getElementById(id).appendChild(input);
+                }
+            }
+            questionPlace.appendChild(questionType);
+            // --------answer------
+            let answer = document.createElement("input");
+            answer.type = "text";
+            answer.placeholder = "Ответ здесь";
+            questionPlace.appendChild(answer);
+            parent.appendChild(questionPlace);
+        }
+
+        function changeQuestionType(id) {
+            alert(id);
+            let answerType = document.getElementById(id).children[1].value;
+            //alert(answerType);
+            let answer = document.getElementById(id).children[2];
+            if (answerType == "Короткий ответ") {
+                answer.type = "text";
+            } else if (answerType == "Длинный ответ") {
+                let textArea = document.createElement("textArea");
+                answer = textArea;
+            } else if (answerType == "Чекбокс") {
+                answer.type = "checkbox";
+            }
+        }
+
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="~/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+</body>
+
+
+<!--
     <button class="button" data-toggle="modal" data-target="#chooseType">
         +
     </button>
@@ -22,6 +126,8 @@
     <div class="answerList" id="ansList">
         <label>Answer List</label>
     </div>
+
+    <button>Сохранить</button>
 
     <div class="modal fade" id="chooseType">
         <div class="modal-dialog">
@@ -125,13 +231,4 @@
         }
 
     </script>
-
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="~/bootstrap/js/bootstrap.min.js"></script>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-</body>
-
-
+-->

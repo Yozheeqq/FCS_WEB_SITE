@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FCS_WebSite_v2.Data.Forms
 {
     public class Form
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string? Id { get; set; }
         public string? Name { get; set; }
         public DateTime? StartDate { get; set; }

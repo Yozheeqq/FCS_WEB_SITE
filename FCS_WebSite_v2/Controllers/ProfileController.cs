@@ -14,9 +14,5 @@ namespace FCS_WebSite_v2.Controllers
         {
             return View();
         }
-
-
-       
-
     }
 }

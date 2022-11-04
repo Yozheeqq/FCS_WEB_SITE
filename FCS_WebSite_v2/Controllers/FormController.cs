@@ -8,7 +8,7 @@ namespace FCS_WebSite_v2.Controllers
     [Route("form/")]
     public class FormController : Controller
     {
-   
+
         [Route("{id}")]
         public IActionResult Index(string id)
         {
@@ -16,30 +16,43 @@ namespace FCS_WebSite_v2.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(IFormCollection fc)
+        [Route("myforms/")]
+        public IActionResult MyForms()
         {
-            Random rnd = new Random();
+            return View();
+        }
+        
+        [HttpPost]
+        public IActionResult Edit(IFormCollection fc)
+        {
             Form form = new Form()
             {
-                Id = rnd.Next().ToString(), // заменить
-                Name = fc["name"],
-                StartDate = new DateTime(2002, 10, 31), // заменить
-                EndDate = new DateTime(2002, 11, 12), // заменить
+                // id генерируется автоматически
                 EventId = "tstevent", // тоже брать ивент из контекста
                 CreatorId = ((ClaimsIdentity)User.Identity).FindFirst(ClaimTypes.NameIdentifier).Value
             };
-
             DBObjects.InitialForm(form);
-            ViewBag.id = form.Id;
-            return Redirect($"/form/create/{form.Id}");
+            return Redirect($"/form/edit/{form.Id}");
         }
 
-        [HttpGet]
-        [Route("create/{id}")]
-        public IActionResult Create([FromRoute]string id)
+        private DateTime ParseDate(string input)
         {
-           var form =  DBObjects.GetForm().Where(x => x.Id == id).First();
-            return View(form);  
+            var parsed = input.Split('T');
+            var date = parsed[0];
+            var time = parsed[1];
+            var dateParse = date.Split('-').Select(x => int.Parse(x)).ToList();
+            var timeParse = time.Split(':').Select(x => int.Parse(x)).ToList();
+            return new DateTime(dateParse[0], dateParse[1],
+                dateParse[2], timeParse[0],
+                timeParse[1], 0);
+        }
+        
+        [HttpGet]
+        [Route("edit/{id}")]
+        public IActionResult Edit([FromRoute] string id)
+        {
+            var form = DBObjects.GetForm().Where(x => x.Id == id).First();
+            return View(form);
         }
     }
 }

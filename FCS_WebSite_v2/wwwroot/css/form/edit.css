@@ -1,0 +1,23 @@
+﻿.heading {
+    margin-left: auto;
+    margin-right: auto;
+    width: 400px;
+    border: 1px solid blue;
+}
+
+.date {
+    display: none;
+}
+
+.body {
+    width: 400px;
+    margin-top: 40px;
+    margin-left: auto;
+    margin-right: auto;
+    align-items: center;
+}
+
+#addQuestion {
+    margin-left: 50%;
+    margin-right: 50%;
+}
