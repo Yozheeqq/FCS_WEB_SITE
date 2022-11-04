@@ -1,4 +1,5 @@
 ﻿using FCS_WebSite.Models;
+using FCS_WebSite_v2.Data.Forms;
 using Microsoft.EntityFrameworkCore;
 
 namespace FCS_WebSite_v2.Data.DB
@@ -23,6 +24,12 @@ namespace FCS_WebSite_v2.Data.DB
             Content.SaveChanges();
         }
 
+        public static void InitialForm(Form form)
+        {
+            Content.Form.Add(form);
+            Content.SaveChanges();
+        }
+
         public static DbSet<Pupil> GetPupil()
         {
             return Content.Pupil;
@@ -31,6 +38,11 @@ namespace FCS_WebSite_v2.Data.DB
         public static DbSet<Teacher> GetTeacher()
         {
             return Content.Teacher;
+        }
+
+        public static DbSet<Form> GetForm()
+        {
+            return Content.Form;
         }
     }
 }

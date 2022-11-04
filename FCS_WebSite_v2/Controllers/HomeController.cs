@@ -4,6 +4,7 @@ using System.Diagnostics;
 
 namespace FCS_WebSite.Controllers
 {
+    [Route("home/")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

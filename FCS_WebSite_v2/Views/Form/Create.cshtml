@@ -1,0 +1,137 @@
+﻿@using FCS_WebSite_v2.Data.Forms;
+@{
+}
+
+@{
+    ViewData["Title"] = "CreateForm";
+}
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/FCS_WebSite_v2.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/createForm.css" />
+</head>
+<body>
+    <button class="button" data-toggle="modal" data-target="#chooseType">
+        +
+    </button>
+
+    <div class="answerList" id="ansList">
+        <label>Answer List</label>
+    </div>
+
+    <div class="modal fade" id="chooseType">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <button data-toggle="modal" data-target="#additionInfoShortAnswer">Короткий ответ</button>
+                <button data-toggle="modal" data-target="#additionInfoLongAnswer">Длинный ответ</button>
+                <button data-toggle="modal" data-target="#additionInfoCheckBox">Чекбокс</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="additionInfoShortAnswer">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <input class="additionText" id="addTextSA" placeholder="Дополнительная информация" />
+                <input type="checkbox" id="necessarilySA" name="necessarilySA" />
+                <label for="necessarilySA">Обязательный пункт</label>
+                <button data-dismiss="modal" onclick="addShortAnswer()">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="additionInfoLongAnswer">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <input class="additionText" id="addTextLA" placeholder="Дополнительная информация" />
+                <input type="checkbox" id="necessarilyLA" name="necessarilyLA" />
+                <label for="necessarilyLA">Обязательный пункт</label>
+                <button data-dismiss="modal" onclick="addLongAnswer()">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="additionInfoCheckBox">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <input class="additionText" id="addTextCB" placeholder="Дополнительная информация" />
+                <input type="checkbox" id="necessarilyCB" name="necessarilyCB" />
+                <label for="necessarilyCB">Обязательный пункт</label>
+                <button data-dismiss="modal" onclick="addCheckbox()">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function addShortAnswer() {
+            let parent = document.getElementById("ansList");
+            let shortAnswer = document.createElement("input");
+            shortAnswer.className = "shortAnswer answer";
+            shortAnswer.id = "short";
+            shortAnswer.name = "short";
+            let label = document.createElement("label");
+            label.htmlFor = "short";
+            label.className = "answer";
+            let additionalInfo = document.getElementById("addTextSA");
+            label.innerHTML = additionalInfo.value;
+            if (document.getElementById("necessarilySA").checked) {
+                label.style.color = "red";
+            }
+            parent.appendChild(label);
+            parent.appendChild(shortAnswer);
+        }
+
+        function addLongAnswer() {
+            let parent = document.getElementById("ansList");
+            let longAnswer = document.createElement("textarea");
+            longAnswer.className = "longAnswer answer";
+            longAnswer.id = "long";
+            longAnswer.name = "long";
+            let label = document.createElement("label");
+            label.htmlFor = "long";
+            label.className = "answer";
+            let additionalInfo = document.getElementById("addTextLA");
+            label.innerHTML = additionalInfo.value;
+            if (document.getElementById("necessarilyLA").checked) {
+                label.style.color = "red";
+            }
+            parent.appendChild(label);
+            parent.appendChild(longAnswer);
+
+        }
+
+        function addCheckbox() {
+            let parent = document.getElementById("ansList");
+            let checkbox = document.createElement("input");
+            checkbox.className = "checkbox answer";
+            checkbox.type = "checkbox";
+            checkbox.name = "check";
+            checkbox.id = "check";
+            let label = document.createElement("label");
+            label.htmlFor = "check";
+            label.className = "answer";
+            let additionalInfo = document.getElementById("addTextCB");
+            label.innerHTML = additionalInfo.value;
+            if (document.getElementById("necessarilyCB").checked) {
+                label.style.color = "red";
+            }
+            parent.appendChild(label);
+            parent.appendChild(checkbox);
+
+        }
+
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="~/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+</body>
+
+

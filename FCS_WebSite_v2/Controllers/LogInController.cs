@@ -5,6 +5,7 @@ using System.Web;
 
 namespace FCS_WebSite.Controllers
 {
+    [Route("login/")]
     public class LogInController : Controller
     {
         public IActionResult Index()

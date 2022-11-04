@@ -4,6 +4,7 @@ using FCS_WebSite_v2.Data.DB;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FCS_WebSite_v2.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221104122225_Identity_v2_34")]
+    partial class Identity_v2_34
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -84,19 +86,6 @@ namespace FCS_WebSite_v2.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("FormQuestion", "Identity");
-                });
-
-            modelBuilder.Entity("FCS_WebSite_v2.Data.Forms.QuestionType", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("QuestionType", "Identity");
                 });
 
             modelBuilder.Entity("FCS_WebSite.Models.Pupil", b =>

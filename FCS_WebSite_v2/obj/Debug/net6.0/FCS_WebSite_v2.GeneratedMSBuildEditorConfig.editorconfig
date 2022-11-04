@@ -23,18 +23,6 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/anvar/Documents/GitHub/FCS_WEB_SITE/FCS_WebSite_v2/Areas/Identity/Pages/Account/Profile.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxQcm9maWxlLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/anvar/Documents/GitHub/FCS_WEB_SITE/FCS_WebSite_v2/Areas/Identity/Pages/Account/Profile/CreateForm.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxQcm9maWxlXENyZWF0ZUZvcm0uY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/anvar/Documents/GitHub/FCS_WEB_SITE/FCS_WebSite_v2/Areas/Identity/Pages/Account/Profile/MyForms.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxQcm9maWxlXE15Rm9ybXMuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/anvar/Documents/GitHub/FCS_WEB_SITE/FCS_WebSite_v2/Areas/Identity/Pages/Account/RegisterConfirmation.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxSZWdpc3RlckNvbmZpcm1hdGlvbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -91,8 +79,20 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/anvar/Documents/GitHub/FCS_WEB_SITE/FCS_WebSite_v2/Views/Form/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRm9ybVxDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/anvar/Documents/GitHub/FCS_WEB_SITE/FCS_WebSite_v2/Views/Form/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRm9ybVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/anvar/Documents/GitHub/FCS_WEB_SITE/FCS_WebSite_v2/Views/LogIn/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9nSW5cSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/anvar/Documents/GitHub/FCS_WEB_SITE/FCS_WebSite_v2/Views/Profile/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZmlsZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/anvar/Documents/GitHub/FCS_WEB_SITE/FCS_WebSite_v2/Views/Registration/Index.cshtml]

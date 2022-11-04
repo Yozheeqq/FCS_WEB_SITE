@@ -1,4 +1,5 @@
 ﻿using FCS_WebSite.Models;
+using FCS_WebSite_v2.Data.Forms;
 using FCS_WebSite_v2.Data.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -34,5 +35,9 @@ namespace FCS_WebSite_v2.Data.DB
         public DbSet<Pupil> Pupil { set; get; }
         public DbSet<Teacher> Teacher { set; get; }
         public DbSet<User> User { set; get; }
+        public DbSet<Event> Event { set; get; }
+        public DbSet<Form> Form { set; get; }
+        public DbSet<FormQuestion> FormQuestion { set; get; }
+        public DbSet<QuestionType> QuestionType { set; get; }
     }
 }

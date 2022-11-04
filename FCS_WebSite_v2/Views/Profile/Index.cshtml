@@ -1,0 +1,37 @@
+﻿
+@{
+    ViewData["Title"] = "Profile";
+}
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/bootstrap/css/bootstrap.min.css">
+</head>
+<body>
+    <button data-toggle="modal" data-target="#formCreation">Создать форму</button>
+
+    <div class="modal fade" id="formCreation">
+        <div class="modal-dialog">
+            @using (Html.BeginForm("Create", "Form", FormMethod.Post))
+            {
+                <div class="modal-content">
+                    <input type="text" name="Name" placeholder="Название" />
+                    <input type="datetime" name="startDate" placeholder="Начало" />
+                    <input type="datetime" name="endDate" placeholder="Конец" />
+                    <button>Создать</button>
+                </div>
+            }
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="~/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+</body>
