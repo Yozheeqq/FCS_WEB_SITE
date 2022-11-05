@@ -46,16 +46,37 @@
         function addQuestion() {
             let parent = document.getElementById("question");
             let questionPlace = document.createElement("div");
-            questionPlace.id = "qp" + parent.childElementCount;
+            let parentChildCount = parent.childElementCount;
+            questionPlace.id = "qp" + parentChildCount;
+            questionPlace.style.border = "1px solid black";
             // ------questionName-----
             let question = document.createElement("input");
             question.type = "text";
             question.placeholder = "Вопрос";
             questionPlace.appendChild(question);
+            // -------buttonForCheckBox------
+            let buttonCheckBox = document.createElement("button");
+            buttonCheckBox.textContent = "+";
+            buttonCheckBox.id = "btncb" + parentChildCount;
+            buttonCheckBox.style.display = "none";
+            buttonCheckBox.onclick = function () {
+                let input = document.createElement("input");
+                input.type = "checkbox";
+                input.id = "checkbox" + parentChildCount;
+                input.name = "checkbox" + parentChildCount;
+                let checkboxQuestion = document.createElement("input");
+                checkboxQuestion.for = input.name;
+                checkboxQuestion.value = "Вариант"
+                let checkboxes = document.createElement("div");
+                checkboxes.id = "dvcb" + parentChildCount;
+                checkboxes.style.border = "1px solid blue";
+                checkboxes.appendChild(input);
+                checkboxes.appendChild(checkboxQuestion);
+                questionPlace.appendChild(checkboxes);
+            }
             // ------select------
             let questionType = document.createElement("select");
             let temp = questionPlace.id;
-            //questionType.onchange = "changeQuestionType('12')";
             let opt1 = document.createElement("option");
             let opt2 = document.createElement("option");
             let opt3 = document.createElement("option");
@@ -66,45 +87,30 @@
             questionType.appendChild(opt2);
             questionType.appendChild(opt3);
             questionType.onchange = function () {
-                let id = questionPlace.id;
-                let answerType = document.getElementById(id).children[1].value;
-                let answer = document.getElementById(id).children[2];
-                document.getElementById(id).removeChild(answer);
+                let answerType = questionPlace.children[1].value;
+                let answer = questionPlace.children[3];
+                questionPlace.removeChild(answer);
                 if (answerType == "Короткий ответ") {
+                    buttonCheckBox.style.display = "none";
                     let input = document.createElement("input");
                     input.type = "text";
-                    document.getElementById(id).appendChild(input);
+                    questionPlace.appendChild(input);
                 } else if (answerType == "Длинный ответ") {
+                    buttonCheckBox.style.display = "none";
                     let textArea = document.createElement("textArea");
-                    document.getElementById(id).appendChild(textArea);
+                    questionPlace.appendChild(textArea);
                 } else if (answerType == "Чекбокс") {
-                    let input = document.createElement("input");
-                    input.type = "checkbox";
-                    document.getElementById(id).appendChild(input);
+                    buttonCheckBox.style.display = "inline";
                 }
             }
             questionPlace.appendChild(questionType);
+            questionPlace.appendChild(buttonCheckBox);
             // --------answer------
             let answer = document.createElement("input");
             answer.type = "text";
             answer.placeholder = "Ответ здесь";
             questionPlace.appendChild(answer);
             parent.appendChild(questionPlace);
-        }
-
-        function changeQuestionType(id) {
-            alert(id);
-            let answerType = document.getElementById(id).children[1].value;
-            //alert(answerType);
-            let answer = document.getElementById(id).children[2];
-            if (answerType == "Короткий ответ") {
-                answer.type = "text";
-            } else if (answerType == "Длинный ответ") {
-                let textArea = document.createElement("textArea");
-                answer = textArea;
-            } else if (answerType == "Чекбокс") {
-                answer.type = "checkbox";
-            }
         }
 
     </script>
