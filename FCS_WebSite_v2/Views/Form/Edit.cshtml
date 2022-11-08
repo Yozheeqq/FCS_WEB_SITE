@@ -72,9 +72,9 @@
                 checkboxes.style.border = "1px solid blue";
                 checkboxes.appendChild(input);
                 checkboxes.appendChild(checkboxQuestion);
-                questionPlace.appendChild(checkboxes);
+                questionPlace.children[3].appendChild(checkboxes);
             }
-            // ------select------
+            // ------select---questionType---
             let questionType = document.createElement("select");
             let temp = questionPlace.id;
             let opt1 = document.createElement("option");
@@ -88,17 +88,19 @@
             questionType.appendChild(opt3);
             questionType.onchange = function () {
                 let answerType = questionPlace.children[1].value;
-                let answer = questionPlace.children[3];
-                questionPlace.removeChild(answer);
+                let answerPlace = questionPlace.children[3];
+                while (answerPlace.firstChild) {
+                    answerPlace.removeChild(answerPlace.firstChild);
+                }
                 if (answerType == "Короткий ответ") {
                     buttonCheckBox.style.display = "none";
                     let input = document.createElement("input");
                     input.type = "text";
-                    questionPlace.appendChild(input);
+                    answerPlace.appendChild(input);
                 } else if (answerType == "Длинный ответ") {
                     buttonCheckBox.style.display = "none";
                     let textArea = document.createElement("textArea");
-                    questionPlace.appendChild(textArea);
+                    answerPlace.appendChild(textArea);
                 } else if (answerType == "Чекбокс") {
                     buttonCheckBox.style.display = "inline";
                 }
@@ -106,10 +108,22 @@
             questionPlace.appendChild(questionType);
             questionPlace.appendChild(buttonCheckBox);
             // --------answer------
+            let answerPlace = document.createElement("div");
             let answer = document.createElement("input");
             answer.type = "text";
             answer.placeholder = "Ответ здесь";
-            questionPlace.appendChild(answer);
+            answerPlace.appendChild(answer);
+            questionPlace.appendChild(answerPlace);
+
+            // ----------delete-----------
+            let deleteButton = document.createElement("button");
+            deleteButton.textContent = "X";
+            deleteButton.style.marginLeft = "20px";
+            deleteButton.onclick = function () {
+                parent.removeChild(questionPlace);
+            }
+            questionPlace.appendChild(deleteButton);
+
             parent.appendChild(questionPlace);
         }
 
