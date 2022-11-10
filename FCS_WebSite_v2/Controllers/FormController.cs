@@ -16,13 +16,6 @@ namespace FCS_WebSite_v2.Controllers
         }
 
         [HttpPost]
-        [Route("myforms/")]
-        public IActionResult MyForms()
-        {
-            return View();
-        }
-
-        [HttpPost]
         public IActionResult Edit(IFormCollection fc)
         {
             Form form = new Form()
@@ -52,7 +45,9 @@ namespace FCS_WebSite_v2.Controllers
         public IActionResult Edit([FromRoute] string id)
         {
             var form = DBObjects.GetForm().Where(x => x.Id == id).First();
-            return View(form);
+            var formElements = DBObjects.GetFormQuestions().Where(x => x.FormId == id).ToList();
+            var model = new Tuple<Form, List<FormQuestion>>(form, formElements);
+            return View(model);
         }
 
         [HttpPost("{id}")]
@@ -61,7 +56,7 @@ namespace FCS_WebSite_v2.Controllers
             SetFormAttributes(fc, id);
             CreateQuestions(fc, id);
 
-            return Ok();
+            return Redirect("/profile/myforms");
         }
 
         private void CreateQuestions(IFormCollection fc, string id)

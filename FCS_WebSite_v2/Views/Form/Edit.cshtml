@@ -2,11 +2,10 @@
 @using FCS_WebSite_v2.Data.DB;
 @{
 }
-
 @{
     ViewData["Title"] = "CreateForm";
 }
-@using (Html.BeginForm("SaveForm", "Form",new {id = Model.Id}, FormMethod.Post))
+@using (Html.BeginForm("SaveForm", "Form",new {id = Model.Item1.Id}, FormMethod.Post))
 {
     <head>
         <meta charset="utf-8" />
@@ -15,7 +14,7 @@
         <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
         <link rel="stylesheet" href="~/FCS_WebSite_v2.styles.css" asp-append-version="true" />
         <link rel="stylesheet" href="~/bootstrap/css/bootstrap.min.css">
-        <link rel="stylesheet" href="~/css/form/edit.css" />
+        <link rel="stylesheet" href="~/css/form/edit.css" />    
     </head>
     <body>
 
@@ -73,13 +72,14 @@
             </div>
         </div>
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        
+        <!--Добавление формочек-->
         <script type="text/javascript">
-
             $("#ifdate").click(function showDate() {
                 let checkbox = document.getElementById("ifdate");
                 let date = document.getElementById("date");
                 if (checkbox.checked) {
-                    date.style.display = "block";
+                    document.getElementById("date").style.display = "block";
                 } else {
                     date.style.display = "none";
                 }
@@ -202,6 +202,34 @@
                 questionTypePlace.appendChild(deleteButton);
             });
         </script>
+
+        <script>
+            $(document).ready(function () {
+            @if (Model.Item1.StartDate != null)
+            {
+                DateTime startDatecs = @Model.Item1.StartDate;
+                DateTime endDatecs = @Model.Item1.EndDate;
+                <text>
+                document.getElementById("date").style.display = "block";
+                let startDate = @startDatecs.Year + "-" + ("0" + @startDatecs.Month).slice(-2) +
+                        "-" + ("0" + @startDatecs.Day).slice(-2);
+                let endDate = @endDatecs.Year + "-" + ("0" + @endDatecs.Month).slice(-2) +
+                        "-" + ("0" + @endDatecs.Day).slice(-2);
+                document.getElementById("ifdate").checked = true;
+                document.getElementById("startDate").value = startDate;
+                document.getElementById("endDate").value = endDate;
+                    
+                </text>
+            }
+            @foreach (FormQuestion formQuestrion in Model.Item2)
+            {
+
+
+            }
+            });
+        </script>
+
+
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="~/bootstrap/js/bootstrap.min.js"></script>
         <script src="~/lib/jquery/dist/jquery.min.js"></script>

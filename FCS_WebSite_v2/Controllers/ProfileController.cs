@@ -14,5 +14,18 @@ namespace FCS_WebSite_v2.Controllers
         {
             return View();
         }
+
+        [HttpGet]
+        [Route("myforms/")]
+        public IActionResult MyForms()
+        {
+            LoadUserForms();
+            return View();
+        }
+
+        private void LoadUserForms()
+        {
+
+        }
     }
 }
