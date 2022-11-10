@@ -1,4 +1,5 @@
 ﻿@using FCS_WebSite_v2.Data.Forms;
+@using FCS_WebSite_v2.Data.DB;
 @{
 }
 
@@ -15,6 +16,7 @@
     <link rel="stylesheet" href="~/css/form/edit.css" />
 </head>
 <body>
+
     <div class="container">
         <div class="row">
             <div class="col border border-1">
@@ -45,9 +47,6 @@
             <div class="col border border-1">
             </div>
             <div class="col-7 border border-1 justify-content-center text-center">
-
-
-
                 <div class="questions" id="question">
                 </div>
 
@@ -55,8 +54,6 @@
                         id="addQuestion" type="button" name="addQuestion" onclick="addQuestion()">
                     +
                 </button>
-
-
             </div>
             <div class="col border border-1">
             </div>
@@ -65,16 +62,18 @@
             <div class="col border border-1"></div>
             <div class="col border border-1"></div>
             <div class="col border border-1 text-center" style="justify-content: center; display: block;">
-                <button class="btn btn-outline-primary" type="button" name="button"
+                @using (Html.BeginForm("SaveForm", "Form", FormMethod.Post))
+                {
+                    <button class="btn btn-outline-primary" type="button" name="button"
                         style="margin-top:15%;">
-                    Сохранить
-                </button>
+                        Сохранить
+                    </button>
+                }
             </div>
             <div class="col border border-1"></div>
             <div class="col border border-1"></div>
         </div>
     </div>
-
     <script>
         function showDate() {
             let checkbox = document.getElementById("ifdate");
@@ -203,7 +202,6 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
 </body>
-
 
 <!--
     <button class="button" data-toggle="modal" data-target="#chooseType">

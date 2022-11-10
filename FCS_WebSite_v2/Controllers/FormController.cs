@@ -21,7 +21,7 @@ namespace FCS_WebSite_v2.Controllers
         {
             return View();
         }
-        
+
         [HttpPost]
         public IActionResult Edit(IFormCollection fc)
         {
@@ -46,13 +46,19 @@ namespace FCS_WebSite_v2.Controllers
                 dateParse[2], timeParse[0],
                 timeParse[1], 0);
         }
-        
+
         [HttpGet]
         [Route("edit/{id}")]
         public IActionResult Edit([FromRoute] string id)
         {
             var form = DBObjects.GetForm().Where(x => x.Id == id).First();
             return View(form);
+        }
+
+        [HttpPost("{id}")]
+        public IActionResult SaveForm(IFormCollection fc)
+        {
+            return Ok();
         }
     }
 }
