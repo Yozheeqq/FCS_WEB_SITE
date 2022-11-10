@@ -1,4 +1,6 @@
-﻿namespace FCS_WebSite_v2.Data.Forms
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace FCS_WebSite_v2.Data.Forms
 {
     public class QuestionType
     {

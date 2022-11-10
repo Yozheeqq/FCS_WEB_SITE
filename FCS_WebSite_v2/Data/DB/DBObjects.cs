@@ -30,6 +30,12 @@ namespace FCS_WebSite_v2.Data.DB
             Content.SaveChanges();
         }
 
+        public static void InitialFormQuestion(FormQuestion formQuestion)
+        {
+            Content.FormQuestion.Add(formQuestion);
+            Content.SaveChanges();
+        }
+
         public static DbSet<Pupil> GetPupil()
         {
             return Content.Pupil;
@@ -43,6 +49,11 @@ namespace FCS_WebSite_v2.Data.DB
         public static DbSet<Form> GetForm()
         {
             return Content.Form;
+        }
+
+        public static DbSet<FormQuestion> GetFormQuestions()
+        {
+            return Content.FormQuestion;
         }
     }
 }

@@ -6,7 +6,7 @@
 @{
     ViewData["Title"] = "CreateForm";
 }
-@using (Html.BeginForm("SaveForm", "Form", FormMethod.Post, new {id = Model.Id}))
+@using (Html.BeginForm("SaveForm", "Form",new {id = Model.Id}, FormMethod.Post))
 {
     <head>
         <meta charset="utf-8" />

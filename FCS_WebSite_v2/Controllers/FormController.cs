@@ -58,7 +58,68 @@ namespace FCS_WebSite_v2.Controllers
         [HttpPost("{id}")]
         public IActionResult SaveForm(IFormCollection fc, string id)
         {
+            SetFormAttributes(fc, id);
+            CreateQuestions(fc, id);
+
             return Ok();
+        }
+
+        private void CreateQuestions(IFormCollection fc, string id)
+        {
+            var formKeys = fc.Keys.Where(x => x.StartsWith("select_")).ToList();
+            for(int i = 0; i < formKeys.Count; i++)
+            {
+                FormQuestion formQuestion = new FormQuestion();
+                formQuestion.FormId = id;
+                switch (fc[formKeys[i]])
+                {
+                    case "0":
+                        formQuestion.TypeId = "qshort";
+                        break;
+                    case "1":
+                        formQuestion.TypeId = "qlong";
+                        break;
+                    case "2":
+                        formQuestion.TypeId = "qcheckbox";
+                        break;
+                }
+                var idForAll = formKeys[i].Split('_')[1];
+                var inputKey = "questionInput_" + idForAll;
+                formQuestion.Content = fc[inputKey];
+                if(fc[formKeys[i]] == "2")
+                {
+                    var keyForCheckboxAns = "inputPlace_" + idForAll;
+                    var checkBoxAnswers = fc.Keys.
+                        Where(x => x.StartsWith(keyForCheckboxAns)).ToList();
+                    for(int j = 0; j < checkBoxAnswers.Count; j++)
+                    {
+                        var answer = fc[checkBoxAnswers[j]];
+                        formQuestion.Content += ";" + answer;
+                    }
+                }
+                DBObjects.InitialFormQuestion(formQuestion);
+            }
+        }
+
+        private void SetFormAttributes(IFormCollection fc, string formId)
+        {
+            var form = DBObjects.GetForm().Where(x => x.Id == formId).First();
+            form.Name = fc["formname"];
+            var ifDate = fc["ifdate"];
+            if(!String.IsNullOrEmpty(ifDate))
+            {
+                var startDates = fc["startDate"].ToString().Split('-').
+                    Select(x => int.Parse(x)).ToList();
+                DateTime startDate = new DateTime(
+                    startDates[0], startDates[1], startDates[2]);
+                var endDates = fc["endDate"].ToString().Split('-').
+                    Select(x => int.Parse(x)).ToList();
+                DateTime endDate = new DateTime(
+                    endDates[0], endDates[1], endDates[2]);
+                form.StartDate = startDate;
+                form.EndDate = endDate;
+            }
+            DBObjects.Content.SaveChanges();
         }
     }
 }
