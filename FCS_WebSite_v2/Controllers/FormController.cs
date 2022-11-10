@@ -56,7 +56,7 @@ namespace FCS_WebSite_v2.Controllers
         }
 
         [HttpPost("{id}")]
-        public IActionResult SaveForm(IFormCollection fc)
+        public IActionResult SaveForm(IFormCollection fc, string id)
         {
             return Ok();
         }

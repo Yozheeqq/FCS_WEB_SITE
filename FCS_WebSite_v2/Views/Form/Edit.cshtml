@@ -6,314 +6,206 @@
 @{
     ViewData["Title"] = "CreateForm";
 }
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/FCS_WebSite_v2.styles.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="~/css/form/edit.css" />
-</head>
-<body>
+@using (Html.BeginForm("SaveForm", "Form", FormMethod.Post, new {id = Model.Id}))
+{
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/FCS_WebSite_v2.styles.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="~/css/form/edit.css" />
+    </head>
+    <body>
 
-    <div class="container">
-        <div class="row">
-            <div class="col border border-1">
-            </div>
-            <div class="col-7">
-                <div class="row">
-                    <div class="col border border-1">
-                        <input type="text" class="form-control" id="formname" name="formname" value="Название" />
-                    </div>
-                    <div class="col border border-1">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="ifdate" onclick="showDate()">
-                            <label class="form-check-label" for="ifdate">
-                                Установить дату
-                            </label>
+        <div class="container">
+            <div class="row">
+                <div class="col border border-1">
+                </div>
+                <div class="col-7">
+                    <div class="row">
+                        <div class="col border border-1">
+                            <input type="text" class="form-control" id="formname" name="formname" value="Название" />
+                        </div>
+                        <div class="col border border-1">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="ifdate" name="ifdate">
+                                <label class="form-check-label" for="ifdate">
+                                    Установить дату
+                                </label>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col border border-1">
-                <div class="date" id="date">
-                    <input type="date" id="startDate" />
-                    <input type="date" id="endDate" />
+                <div class="col border border-1">
+                    <div class="date" id="date">
+                        <input type="date" id="startDate" name="startDate"/>
+                        <input type="date" id="endDate" name="endDate"/>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col border border-1">
-            </div>
-            <div class="col-7 border border-1 justify-content-center text-center">
-                <div class="questions" id="question">
+            <div class="row">
+                <div class="col border border-1">
                 </div>
+                <div class="col-7 border border-1 justify-content-center text-center">
+                    <div class="questions" id="question">
+                    </div>
+                    <button class="btn btn-primary btn-sm" type="button" id="addQuestion">
+                        +
+                    </button>
+                </div>
+                <div class="col border border-1">
+                </div>
+            </div>
+            <div class="row" style="height: 100px">
+                <div class="col border border-1"></div>
+                <div class="col border border-1"></div>
+                <div class="col border border-1 text-center" style="justify-content: center; display: block;">
 
-                <button class="btn btn-primary btn-sm"
-                        id="addQuestion" type="button" name="addQuestion" onclick="addQuestion()">
-                    +
-                </button>
-            </div>
-            <div class="col border border-1">
-            </div>
-        </div>
-        <div class="row" style="height: 100px">
-            <div class="col border border-1"></div>
-            <div class="col border border-1"></div>
-            <div class="col border border-1 text-center" style="justify-content: center; display: block;">
-                @using (Html.BeginForm("SaveForm", "Form", FormMethod.Post))
-                {
-                    <button class="btn btn-outline-primary" type="button" name="button"
+                    <button class="btn btn-outline-primary" type="submit" name="saveForm"
                         style="margin-top:15%;">
                         Сохранить
                     </button>
-                }
+                </div>
+                <div class="col border border-1"></div>
+                <div class="col border border-1"></div>
             </div>
-            <div class="col border border-1"></div>
-            <div class="col border border-1"></div>
         </div>
-    </div>
-    <script>
-        function showDate() {
-            let checkbox = document.getElementById("ifdate");
-            let date = document.getElementById("date");
-            if (checkbox.checked) {
-                date.style.display = "block";
-            } else {
-                date.style.display = "none";
-            }
-        }
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script type="text/javascript">
 
-        function addQuestion() {
-            // -----------grid---------------
-            let parent = document.getElementById("question");
-            let place = document.createElement("div");
-            place.setAttribute("class", "row");
-            let questionTypePlace = document.createElement("div");
-            let questionPlace = document.createElement("div");
-            questionPlace.setAttribute("class", "col border border-1");
-            questionTypePlace.setAttribute("class", "col-4 border border-1 justify-content-center text-center");
-            let question = document.createElement("div");
-            let answer = document.createElement("div");
-            question.setAttribute("class", "row");
-            answer.setAttribute("class", "row");
-            questionPlace.appendChild(question);
-            questionPlace.appendChild(answer);
-            place.appendChild(questionPlace);
-            place.appendChild(questionTypePlace);
-            parent.appendChild(place);
-            //-------------filling----------
-
-            //------------select-------------
-            let select = document.createElement("select");
-            let opt = document.createElement("option");
-            var options = [];
-            for (var i = 0; i < 3; i++) {
-                options.push(document.createElement("option"));
-            }
-            options[0].innerHTML = "Короткий ответ";
-            options[1].innerHTML = "Длинный ответ";
-            options[2].innerHTML = "Чекбокс";
-            for (var i = 0; i < options.length; i++) {
-                options[i].setAttribute("value", i);
-                select.appendChild(options[i]);
-            }
-            select.onchange = function () {
-                let answerType = select.value;
-                while (answer.firstChild) {
-                    answer.removeChild(answer.firstChild);
-                }
-                buttonForCheckBox.style.display = "none";
-                if (answerType == 0) {
-                    let answerInput = document.createElement("input");
-                    answerInput.setAttribute("type", "text");
-                    answerInput.setAttribute("class", "form-control");
-                    answerInput.setAttribute("placeholder", "Ответ");
-                    answer.appendChild(answerInput);
-                } else if (answerType == 1) {
-                    let answerInput = document.createElement("textarea");
-                    answerInput.setAttribute("class", "form-control");
-                    answer.appendChild(answerInput);
+            $("#ifdate").click(function showDate() {
+                let checkbox = document.getElementById("ifdate");
+                let date = document.getElementById("date");
+                if (checkbox.checked) {
+                    date.style.display = "block";
                 } else {
-                    buttonForCheckBox.style.display = "block";
+                    date.style.display = "none";
                 }
-            }
+            });
 
-            questionTypePlace.appendChild(select);
-            //-------------questionInput--------
-            let questionInput = document.createElement("input");
-            questionInput.setAttribute("type", "text");
-            questionInput.setAttribute("class", "form-control");
-            questionInput.setAttribute("placeholder", "Вопрос");
-            question.appendChild(questionInput);
-            //-------------answerInput----------
-            let answerInput = document.createElement("input");
-            answerInput.setAttribute("type", "text");
-            answerInput.setAttribute("class", "form-control");
-            answerInput.setAttribute("placeholder", "Ответ");
-            answer.appendChild(answerInput);
-            //--------------buttonAddCheckBoxVariant------
-            let buttonForCheckBox = document.createElement("button");
-            buttonForCheckBox.setAttribute("class", "btn btn-primary");
-            buttonForCheckBox.setAttribute("type", "button");
-            buttonForCheckBox.textContent = "+";
-            buttonForCheckBox.style.display = "none";
-            buttonForCheckBox.onclick = function () {
-                let variantsPlace = document.createElement("div");
-                variantsPlace.setAttribute("class", "input-group mb-3");
-                let inputGroupPlace = document.createElement("div");
-                inputGroupPlace.setAttribute("class", "input-group-text");
-                let inputPlace = document.createElement("input");
-                inputPlace.setAttribute("type", "text");
-                inputPlace.setAttribute("class", "form-control");
-                let inputCheckBox = document.createElement("input");
-                inputCheckBox.setAttribute("type", "checkbox");
-                inputCheckBox.setAttribute("class", "form-check-input mt-0");
-                variantsPlace.appendChild(inputGroupPlace);
-                variantsPlace.appendChild(inputPlace);
-                inputGroupPlace.appendChild(inputCheckBox);
-                answer.appendChild(variantsPlace);
-                let deleteVar = document.createElement("button");
-                deleteVar.setAttribute("class", "btn-close");
-                deleteVar.onclick = function () {
-                    answer.removeChild(variantsPlace);
+            $("#addQuestion").click(function addQuestion() {
+                // -----------grid---------------
+                let parent = document.getElementById("question");
+                let idForAll = parent.childElementCount;
+                let place = document.createElement("div");
+                place.setAttribute("class", "row");
+                let questionTypePlace = document.createElement("div");
+                let questionPlace = document.createElement("div");
+                questionPlace.setAttribute("class", "col border border-1");
+                questionTypePlace.setAttribute("class", "col-4 border border-1 justify-content-center text-center");
+                let question = document.createElement("div");
+                let answer = document.createElement("div");
+                question.setAttribute("class", "row");
+                answer.setAttribute("class", "row");
+                questionPlace.appendChild(question);
+                questionPlace.appendChild(answer);
+                place.appendChild(questionPlace);
+                place.appendChild(questionTypePlace);
+                parent.appendChild(place);
+                //-------------filling----------
+
+                //------------select-------------
+                let select = document.createElement("select");
+                select.name = "select_" + idForAll;
+                let opt = document.createElement("option");
+                var options = [];
+                for (var i = 0; i < 3; i++) {
+                    options.push(document.createElement("option"));
                 }
-                variantsPlace.appendChild(deleteVar);
-            }
-            questionTypePlace.appendChild(buttonForCheckBox);
+                options[0].innerHTML = "Короткий ответ";
+                options[1].innerHTML = "Длинный ответ";
+                options[2].innerHTML = "Чекбокс";
+                for (var i = 0; i < options.length; i++) {
+                    options[i].setAttribute("value", i);
+                    select.appendChild(options[i]);
+                }
+                select.onchange = function () {
+                    let answerType = select.value;
+                    while (answer.firstChild) {
+                        answer.removeChild(answer.firstChild);
+                    }
+                    buttonForCheckBox.style.display = "none";
+                    if (answerType == 0) {
+                        let answerInput = document.createElement("input");
+                        answerInput.setAttribute("type", "text");
+                        answerInput.setAttribute("class", "form-control");
+                        answerInput.setAttribute("placeholder", "Ответ");
+                        answerInput.name = "answerInputText_" + idForAll;
+                        answer.appendChild(answerInput);
+                    } else if (answerType == 1) {
+                        let answerInput = document.createElement("textarea");
+                        answerInput.setAttribute("class", "form-control");
+                        answerInput.name = "answerInputArea_" + idForAll;
+                        answer.appendChild(answerInput);
 
-            //----------deleteButton-----------
-            let deleteButton = document.createElement("button");
-            deleteButton.setAttribute("class", "btn-close");
-            deleteButton.onclick = function () {
-                parent.removeChild(place);
-            }
-            questionTypePlace.appendChild(deleteButton);
-        }
+                    } else {
+                        buttonForCheckBox.style.display = "block";
+                    }
+                }
 
+                questionTypePlace.appendChild(select);
+                //-------------questionInput--------
+                let questionInput = document.createElement("input");
+                questionInput.setAttribute("type", "text");
+                questionInput.setAttribute("class", "form-control");
+                questionInput.setAttribute("placeholder", "Вопрос");
+                questionInput.name = "questionInput_" + idForAll;
+                question.appendChild(questionInput);
+                //-------------answerInput----------
+                let answerInput = document.createElement("input");
+                answerInput.setAttribute("type", "text");
+                answerInput.setAttribute("class", "form-control");
+                answerInput.setAttribute("placeholder", "Ответ");
+                answerInput.name = "first_answerInput_" + idForAll;
+                answer.appendChild(answerInput);
+                //--------------buttonAddCheckBoxVariant------
+                let buttonForCheckBox = document.createElement("button");
+                buttonForCheckBox.setAttribute("class", "btn btn-primary");
+                buttonForCheckBox.setAttribute("type", "button");
+                buttonForCheckBox.textContent = "+";
+                buttonForCheckBox.style.display = "none";
+                buttonForCheckBox.onclick = function () {
+                    let ansId = answer.childElementCount;
+                    let variantsPlace = document.createElement("div");
+                    variantsPlace.setAttribute("class", "input-group mb-3");
+                    let inputGroupPlace = document.createElement("div");
+                    inputGroupPlace.setAttribute("class", "input-group-text");
+                    let inputPlace = document.createElement("input");
+                    inputPlace.setAttribute("type", "text");
+                    inputPlace.setAttribute("class", "form-control");
+                    inputPlace.setAttribute("placeholder", "Вариант");
+                    inputPlace.name = "inputPlace_" + idForAll + "_" + ansId;
+                    let inputCheckBox = document.createElement("input");
+                    inputCheckBox.setAttribute("type", "checkbox");
+                    inputCheckBox.setAttribute("class", "form-check-input mt-0");
+                    variantsPlace.appendChild(inputGroupPlace);
+                    variantsPlace.appendChild(inputPlace);
+                    inputGroupPlace.appendChild(inputCheckBox);
+                    answer.appendChild(variantsPlace);
+                    let deleteVar = document.createElement("button");
+                    deleteVar.setAttribute("class", "btn-close");
+                    deleteVar.onclick = function () {
+                        answer.removeChild(variantsPlace);
+                    }
+                    variantsPlace.appendChild(deleteVar);
+                }
+                questionTypePlace.appendChild(buttonForCheckBox);
 
-    </script>
-
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="~/bootstrap/js/bootstrap.min.js"></script>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-</body>
-
-<!--
-    <button class="button" data-toggle="modal" data-target="#chooseType">
-        +
-    </button>
-
-    <div class="answerList" id="ansList">
-        <label>Answer List</label>
-    </div>
-
-    <button>Сохранить</button>
-
-    <div class="modal fade" id="chooseType">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <button data-toggle="modal" data-target="#additionInfoShortAnswer">Короткий ответ</button>
-                <button data-toggle="modal" data-target="#additionInfoLongAnswer">Длинный ответ</button>
-                <button data-toggle="modal" data-target="#additionInfoCheckBox">Чекбокс</button>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade" id="additionInfoShortAnswer">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <input class="additionText" id="addTextSA" placeholder="Дополнительная информация" />
-                <input type="checkbox" id="necessarilySA" name="necessarilySA" />
-                <label for="necessarilySA">Обязательный пункт</label>
-                <button data-dismiss="modal" onclick="addShortAnswer()">OK</button>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade" id="additionInfoLongAnswer">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <input class="additionText" id="addTextLA" placeholder="Дополнительная информация" />
-                <input type="checkbox" id="necessarilyLA" name="necessarilyLA" />
-                <label for="necessarilyLA">Обязательный пункт</label>
-                <button data-dismiss="modal" onclick="addLongAnswer()">OK</button>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade" id="additionInfoCheckBox">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <input class="additionText" id="addTextCB" placeholder="Дополнительная информация" />
-                <input type="checkbox" id="necessarilyCB" name="necessarilyCB" />
-                <label for="necessarilyCB">Обязательный пункт</label>
-                <button data-dismiss="modal" onclick="addCheckbox()">OK</button>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        function addShortAnswer() {
-            let parent = document.getElementById("ansList");
-            let shortAnswer = document.createElement("input");
-            shortAnswer.className = "shortAnswer answer";
-            shortAnswer.id = "short";
-            shortAnswer.name = "short";
-            let label = document.createElement("label");
-            label.htmlFor = "short";
-            label.className = "answer";
-            let additionalInfo = document.getElementById("addTextSA");
-            label.innerHTML = additionalInfo.value;
-            if (document.getElementById("necessarilySA").checked) {
-                label.style.color = "red";
-            }
-            parent.appendChild(label);
-            parent.appendChild(shortAnswer);
-        }
-
-        function addLongAnswer() {
-            let parent = document.getElementById("ansList");
-            let longAnswer = document.createElement("textarea");
-            longAnswer.className = "longAnswer answer";
-            longAnswer.id = "long";
-            longAnswer.name = "long";
-            let label = document.createElement("label");
-            label.htmlFor = "long";
-            label.className = "answer";
-            let additionalInfo = document.getElementById("addTextLA");
-            label.innerHTML = additionalInfo.value;
-            if (document.getElementById("necessarilyLA").checked) {
-                label.style.color = "red";
-            }
-            parent.appendChild(label);
-            parent.appendChild(longAnswer);
-
-        }
-
-        function addCheckbox() {
-            let parent = document.getElementById("ansList");
-            let checkbox = document.createElement("input");
-            checkbox.className = "checkbox answer";
-            checkbox.type = "checkbox";
-            checkbox.name = "check";
-            checkbox.id = "check";
-            let label = document.createElement("label");
-            label.htmlFor = "check";
-            label.className = "answer";
-            let additionalInfo = document.getElementById("addTextCB");
-            label.innerHTML = additionalInfo.value;
-            if (document.getElementById("necessarilyCB").checked) {
-                label.style.color = "red";
-            }
-            parent.appendChild(label);
-            parent.appendChild(checkbox);
-
-        }
-
-    </script>
--->
+                //----------deleteButton-----------
+                let deleteButton = document.createElement("button");
+                deleteButton.setAttribute("class", "btn-close");
+                deleteButton.onclick = function () {
+                    parent.removeChild(place);
+                }
+                questionTypePlace.appendChild(deleteButton);
+            });
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="~/bootstrap/js/bootstrap.min.js"></script>
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+    </body>
+}
