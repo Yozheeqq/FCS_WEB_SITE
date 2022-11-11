@@ -46,6 +46,7 @@ namespace FCS_WebSite_v2.Controllers
         {
             var form = DBObjects.GetForm().Where(x => x.Id == id).First();
             var formElements = DBObjects.GetFormQuestions().Where(x => x.FormId == id).ToList();
+            SortQuestions(formElements);
             var model = new Tuple<Form, List<FormQuestion>>(form, formElements);
             return View(model);
         }
@@ -57,6 +58,11 @@ namespace FCS_WebSite_v2.Controllers
             CreateQuestions(fc, id);
 
             return Redirect("/profile/myforms");
+        }
+
+        private void SortQuestions(List<FormQuestion> formQuestions)
+        {
+            formQuestions.OrderBy(x => int.Parse(x.TypeId.Split('_')[1]));
         }
 
         private void CreateQuestions(IFormCollection fc, string id)

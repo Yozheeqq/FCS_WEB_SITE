@@ -26,6 +26,12 @@
                     <div class="row">
                         <div class="col border border-1">
                             <input type="text" class="form-control" id="formname" name="formname" value="Название" />
+                            @if(Model.Item1.Name != null) 
+                            {
+                                <script>
+                                    document.getElementById("formname").value = '@Model.Item1.Name';
+                                </script>
+                            }
                         </div>
                         <div class="col border border-1">
                             <div class="form-check">
@@ -49,6 +55,43 @@
                 </div>
                 <div class="col-7 border border-1 justify-content-center text-center">
                     <div class="questions" id="question">
+                        @{/*
+                            List<string> keys = ((List<FormQuestion>)Model.Item2).
+                                Where(x => x.StartsWith("select_")).ToList();*/
+                        }
+                        @foreach (FormQuestion formQuestrion in Model.Item2)
+                        {
+                            <div class="row">
+                                <div class="col border border-1">
+                                    <div class="row">
+                                        <input type="text" class="form-control" placeholder="Вопрос"
+                                            value="@formQuestrion.Content"/>
+                                    </div>
+                                    <div class="row">
+                                        <input type="text" class="form-control" placeholder="Ответ" />
+                                    </div>
+                                </div>
+                                <div class="col-4 border border-1 justify-content-center text-center">
+                                    <select>
+                                        <option value="0">Короткий ответ</option>
+                                        <option value="1">Длинный ответ</option>
+                                        <option value="2">Чекбокс</option>
+                                    </select>
+                                    @if(formQuestrion.TypeId == "qshort") {
+
+                                    }
+                                    else if (formQuestrion.TypeId == "qlong") {
+                                        <text>
+                                            
+                                        </text>
+                                    } else {
+                                        <text>
+                                            
+                                        </text>
+                                    }
+                                </div>
+                            </div>
+                        }
                     </div>
                     <button class="btn btn-primary btn-sm" type="button" id="addQuestion">
                         +
@@ -217,14 +260,8 @@
                         "-" + ("0" + @endDatecs.Day).slice(-2);
                 document.getElementById("ifdate").checked = true;
                 document.getElementById("startDate").value = startDate;
-                document.getElementById("endDate").value = endDate;
-                    
+                document.getElementById("endDate").value = endDate;   
                 </text>
-            }
-            @foreach (FormQuestion formQuestrion in Model.Item2)
-            {
-
-
             }
             });
         </script>
