@@ -5,7 +5,7 @@
 @{
     ViewData["Title"] = "CreateForm";
 }
-@using (Html.BeginForm("SaveForm", "Form",new {id = Model.Item1.Id}, FormMethod.Post))
+@using (Html.BeginForm("SaveForm", "Form", new { id = Model.Item1.Id }, FormMethod.Post))
 {
     <head>
         <meta charset="utf-8" />
@@ -14,10 +14,9 @@
         <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
         <link rel="stylesheet" href="~/FCS_WebSite_v2.styles.css" asp-append-version="true" />
         <link rel="stylesheet" href="~/bootstrap/css/bootstrap.min.css">
-        <link rel="stylesheet" href="~/css/form/edit.css" />    
+        <link rel="stylesheet" href="~/css/form/edit.css" />
     </head>
     <body>
-
         <div class="container">
             <div class="row">
                 <div class="col border border-1">
@@ -26,10 +25,11 @@
                     <div class="row">
                         <div class="col border border-1">
                             <input type="text" class="form-control" id="formname" name="formname" value="Название" />
-                            @if(Model.Item1.Name != null) 
+                            @if (Model.Item1.Name != null)
                             {
                                 <script>
                                     document.getElementById("formname").value = '@Model.Item1.Name';
+                                    
                                 </script>
                             }
                         </div>
@@ -45,8 +45,8 @@
                 </div>
                 <div class="col border border-1">
                     <div class="date" id="date">
-                        <input type="date" id="startDate" name="startDate"/>
-                        <input type="date" id="endDate" name="endDate"/>
+                        <input type="date" id="startDate" name="startDate" />
+                        <input type="date" id="endDate" name="endDate" />
                     </div>
                 </div>
             </div>
@@ -55,40 +55,92 @@
                 </div>
                 <div class="col-7 border border-1 justify-content-center text-center">
                     <div class="questions" id="question">
-                        @{/*
-                            List<string> keys = ((List<FormQuestion>)Model.Item2).
-                                Where(x => x.StartsWith("select_")).ToList();*/
-                        }
-                        @foreach (FormQuestion formQuestrion in Model.Item2)
+                        @foreach (FormQuestion formQuestion in Model.Item2)
                         {
-                            <div class="row">
-                                <div class="col border border-1">
-                                    <div class="row">
-                                        <input type="text" class="form-control" placeholder="Вопрос"
-                                            value="@formQuestrion.Content"/>
-                                    </div>
-                                    <div class="row">
-                                        <input type="text" class="form-control" placeholder="Ответ" />
-                                    </div>
-                                </div>
-                                <div class="col-4 border border-1 justify-content-center text-center">
-                                    <select>
-                                        <option value="0">Короткий ответ</option>
-                                        <option value="1">Длинный ответ</option>
-                                        <option value="2">Чекбокс</option>
-                                    </select>
-                                    @if(formQuestrion.TypeId == "qshort") {
+                            string questionId = formQuestion.Id.Split(";;")[0].Split("_")[1];
+                            <div id="questionPlace_@questionId" name="place_@questionId">
+                                <div class="row">
+                                    <div class="col border border-1">
+                                        <div class="row">
+                                            <input type="text" id="question_@questionId" class="form-control" placeholder="Вопрос"
+                                           value="" name="questionInput_@questionId" />
+                                        </div>
+                                        <div class="row" id="inputField_@questionId">
+                                            @if (formQuestion.TypeId == "qshort")
+                                            {
+                                                <script>
+                                                    document.getElementById("question_@questionId").
+                                                        setAttribute("value", "@formQuestion.Content");
 
-                                    }
-                                    else if (formQuestrion.TypeId == "qlong") {
-                                        <text>
-                                            
-                                        </text>
-                                    } else {
-                                        <text>
-                                            
-                                        </text>
-                                    }
+                                                </script>
+                                                <input type="text" class="form-control" placeholder="Ответ" />
+                                            }
+                                            else if (formQuestion.TypeId == "qlong")
+                                            {
+                                                <script>
+                                                    document.getElementById("question_@questionId").
+                                                        setAttribute("value", "@formQuestion.Content");
+                                                </script>
+                                                <textarea class="form-control"></textarea>
+                                            }
+                                            else
+                                            {
+                                                var checkboxSplited = formQuestion.Content.Split(";").ToList();
+                                                <script>
+                                                    document.getElementById("question_@questionId").
+                                                        setAttribute("value", "@checkboxSplited[0]");
+                                                </script>
+                                                for (int i = 1; i < checkboxSplited.Count; i++)
+                                                {
+                                                    <div class="input-group mb-3" id="variantPlace_@(questionId)_@i">
+                                                        <div class="input-group-text">
+                                                            <input class="form-check-input mt-0" type="checkbox" value="" aria-label="">
+                                                        </div>
+                                                        <input type="text" class="form-control" aria-label="" value="@checkboxSplited[i]"
+                                                            name="inputPlace_@(questionId)_@i">
+                                                        <button class="btn-close" type="button"
+                                                            onclick="deleteElement('inputField_@questionId', 'variantPlace_@(questionId)_@i')">
+                                                        </button>
+                                                    </div>
+                                                    
+                                                }
+                                            }
+                                        </div>
+                                    </div>
+                                    <div class="col-4 border border-1 justify-content-center text-center">
+                                        <select id="select_@questionId" name="select_@questionId">
+                                            <option value="0">Короткий ответ</option>
+                                            <option value="1">Длинный ответ</option>
+                                            <option value="2">Чекбокс</option>
+                                        </select>
+                                        <button class="btn-close" type="button" 
+                                            onclick="deleteElement('question', 'questionPlace_@questionId')">
+                                        </button>
+                                        @if (formQuestion.TypeId == "qshort")
+                                        {
+                                            <script>
+                                                document.getElementById("select_@questionId").selectedIndex = 0;
+                                            </script>
+                                        }
+                                        else if (formQuestion.TypeId == "qlong")
+                                        {
+                                            <script>
+                                                document.getElementById("select_@questionId").selectedIndex = 1;
+                                            </script>
+                                        }
+                                        else
+                                        {
+                                            <button class="btn btn-primary" type="button" id="buttonCheckBox_@questionId"
+                                        onclick="addCheckBoxVariant('inputField_@questionId', '@questionId')">
+                                                +
+                                            </button>
+
+                                            <script>
+                                                document.getElementById("select_@questionId").selectedIndex = 2;
+                                            </script>
+                                        }
+
+                                    </div>
                                 </div>
                             </div>
                         }
@@ -115,7 +167,70 @@
             </div>
         </div>
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-        
+        }
+
+        <script>
+            /*
+            function changeQuestionType(selectId, answerId, buttonId) {
+                let select = document.getElementById(selectId);
+                let answer = document.getElementById(answerId);
+                let buttonForCheckBox = document.getElementById(buttonId);
+                let answerType = select.value;
+                while (answer.firstChild) {
+                    answer.removeChild(answer.firstChild);
+                }
+                buttonForCheckBox.style.display = "none";
+                if (answerType == 0) {
+                    let answerInput = document.createElement("input");
+                    answerInput.setAttribute("type", "text");
+                    answerInput.setAttribute("class", "form-control");
+                    answerInput.setAttribute("placeholder", "Ответ");
+                    answer.appendChild(answerInput);
+                } else if (answerType == 1) {
+                    let answerInput = document.createElement("textarea");
+                    answerInput.setAttribute("class", "form-control");
+                    answer.appendChild(answerInput);
+                } else {
+                    buttonForCheckBox.style.display = "block";
+                }
+            }*/
+
+            function addCheckBoxVariant(placeId, idForAll) {
+
+                let answer = document.getElementById(placeId);
+                let ansId = answer.childElementCount;
+
+                let variantsPlace = document.createElement("div");
+                variantsPlace.setAttribute("class", "input-group mb-3");
+                let inputGroupPlace = document.createElement("div");
+                inputGroupPlace.setAttribute("class", "input-group-text");
+                let inputPlace = document.createElement("input");
+                inputPlace.setAttribute("type", "text");
+                inputPlace.setAttribute("class", "form-control");
+                inputPlace.setAttribute("placeholder", "Вариант");
+                inputPlace.name = "inputPlace_" + idForAll + "_" + ansId;
+                let inputCheckBox = document.createElement("input");
+                inputCheckBox.setAttribute("type", "checkbox");
+                inputCheckBox.setAttribute("class", "form-check-input mt-0");
+                variantsPlace.appendChild(inputGroupPlace);
+                variantsPlace.appendChild(inputPlace);
+                inputGroupPlace.appendChild(inputCheckBox);
+                answer.appendChild(variantsPlace);
+                let deleteVar = document.createElement("button");
+                deleteVar.setAttribute("class", "btn-close");
+                deleteVar.onclick = function () {
+                    answer.removeChild(variantsPlace);
+                }
+                variantsPlace.appendChild(deleteVar);
+            }
+
+            function deleteElement(parentId, childId) {
+                document.getElementById(parentId).removeChild(
+                    document.getElementById(childId)
+                );
+            }
+        </script>
+
         <!--Добавление формочек-->
         <script type="text/javascript">
             $("#ifdate").click(function showDate() {
@@ -131,9 +246,15 @@
             $("#addQuestion").click(function addQuestion() {
                 // -----------grid---------------
                 let parent = document.getElementById("question");
-                let idForAll = parent.childElementCount;
+                let idForAll = 0;
+                if(parent.childElementCount != 0) {
+                    let str = (parent.children[parent.childElementCount - 1]).getAttribute("name");
+                    alert(str);
+                    idForAll = parseInt(str.split('_')[1]) + 1;
+                }
                 let place = document.createElement("div");
                 place.setAttribute("class", "row");
+                place.setAttribute("name", "place_" + idForAll)
                 let questionTypePlace = document.createElement("div");
                 let questionPlace = document.createElement("div");
                 questionPlace.setAttribute("class", "col border border-1");
@@ -203,6 +324,13 @@
                 answerInput.setAttribute("placeholder", "Ответ");
                 answerInput.name = "first_answerInput_" + idForAll;
                 answer.appendChild(answerInput);
+                //----------deleteButton-----------
+                let deleteButton = document.createElement("button");
+                deleteButton.setAttribute("class", "btn-close");
+                deleteButton.onclick = function () {
+                    parent.removeChild(place);
+                }
+                questionTypePlace.appendChild(deleteButton);
                 //--------------buttonAddCheckBoxVariant------
                 let buttonForCheckBox = document.createElement("button");
                 buttonForCheckBox.setAttribute("class", "btn btn-primary");
@@ -236,13 +364,7 @@
                 }
                 questionTypePlace.appendChild(buttonForCheckBox);
 
-                //----------deleteButton-----------
-                let deleteButton = document.createElement("button");
-                deleteButton.setAttribute("class", "btn-close");
-                deleteButton.onclick = function () {
-                    parent.removeChild(place);
-                }
-                questionTypePlace.appendChild(deleteButton);
+                
             });
         </script>
 
@@ -253,17 +375,17 @@
                 DateTime startDatecs = @Model.Item1.StartDate;
                 DateTime endDatecs = @Model.Item1.EndDate;
                 <text>
-                document.getElementById("date").style.display = "block";
-                let startDate = @startDatecs.Year + "-" + ("0" + @startDatecs.Month).slice(-2) +
+                        document.getElementById("date").style.display = "block";
+                    let startDate = @startDatecs.Year + "-" + ("0" + @startDatecs.Month).slice(-2) +
                         "-" + ("0" + @startDatecs.Day).slice(-2);
-                let endDate = @endDatecs.Year + "-" + ("0" + @endDatecs.Month).slice(-2) +
+                    let endDate = @endDatecs.Year + "-" + ("0" + @endDatecs.Month).slice(-2) +
                         "-" + ("0" + @endDatecs.Day).slice(-2);
-                document.getElementById("ifdate").checked = true;
-                document.getElementById("startDate").value = startDate;
-                document.getElementById("endDate").value = endDate;   
+                    document.getElementById("ifdate").checked = true;
+                    document.getElementById("startDate").value = startDate;
+                    document.getElementById("endDate").value = endDate;
                 </text>
             }
-            });
+                                                                                                                                                });
         </script>
 
 

@@ -55,9 +55,21 @@ namespace FCS_WebSite_v2.Controllers
         public IActionResult SaveForm(IFormCollection fc, string id)
         {
             SetFormAttributes(fc, id);
+            DeletePreviousQuestions(id);
             CreateQuestions(fc, id);
 
             return Redirect("/profile/myforms");
+        }
+
+        private void DeletePreviousQuestions(string id)
+        {
+            var list = DBObjects.GetFormQuestions().Where(x =>
+                x.FormId == id).ToList();
+            for(int i = 0; i < list.Count; i++)
+            {
+                DBObjects.Content.FormQuestion.Remove(list[i]);
+            }
+            DBObjects.Content.SaveChanges();
         }
 
         private void SortQuestions(List<FormQuestion> formQuestions)
@@ -72,6 +84,7 @@ namespace FCS_WebSite_v2.Controllers
             {
                 FormQuestion formQuestion = new FormQuestion();
                 formQuestion.FormId = id;
+                formQuestion.Id = formKeys[i] + ";;" + id; // Ну тут вообще плохо
                 switch (fc[formKeys[i]])
                 {
                     case "0":
@@ -119,6 +132,10 @@ namespace FCS_WebSite_v2.Controllers
                     endDates[0], endDates[1], endDates[2]);
                 form.StartDate = startDate;
                 form.EndDate = endDate;
+            } else
+            {
+                form.StartDate = null;
+                form.EndDate = null;
             }
             DBObjects.Content.SaveChanges();
         }
