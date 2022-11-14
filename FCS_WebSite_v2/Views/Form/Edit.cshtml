@@ -29,7 +29,7 @@
                             {
                                 <script>
                                     document.getElementById("formname").value = '@Model.Item1.Name';
-                                    
+
                                 </script>
                             }
                         </div>
@@ -97,46 +97,96 @@
                                                             <input class="form-check-input mt-0" type="checkbox" value="" aria-label="">
                                                         </div>
                                                         <input type="text" class="form-control" aria-label="" value="@checkboxSplited[i]"
-                                                            name="inputPlace_@(questionId)_@i">
+                                               name="inputPlace_@(questionId)_@i">
                                                         <button class="btn-close" type="button"
-                                                            onclick="deleteElement('inputField_@questionId', 'variantPlace_@(questionId)_@i')">
+                                                onclick="deleteElement('inputField_@questionId', 'variantPlace_@(questionId)_@i')">
                                                         </button>
                                                     </div>
-                                                    
+
                                                 }
                                             }
                                         </div>
+                                        <script type="text/javascript">
+                                            function addShortInput(id) {
+                                                let inputField = document.getElementById("inputField_" + id);
+                                                while (inputField.firstChild) {
+                                                    inputField.removeChild(inputField.firstChild);
+
+                                                }
+                                                let button = document.getElementById("buttonCheckBox_" + id);
+                                                button.style.display = "none";
+                                                inputField.innerHTML += '<input type="text" class="form-control" placeholder = "Ответ" />';
+                                            }
+
+                                            function addLongInput(id) {
+                                                
+                                                let inputField = document.getElementById("inputField_" + id);
+                                                while (inputField.firstChild) {
+                                                    inputField.removeChild(inputField.firstChild);
+                                                }
+                                                let button = document.getElementById("buttonCheckBox_" + id);
+                                                button.style.display = "none";
+                                                inputField.innerHTML += '<textarea class="form-control"></textarea>';
+                                            }
+
+                                            function addCheckboxInput(id) {
+                                                let inputField = document.getElementById("inputField_" + id);
+                                                while (inputField.firstChild) {
+                                                    inputField.removeChild(inputField.firstChild);
+                                                }
+                                                let button = document.getElementById("buttonCheckBox_" + id);
+                                                button.style.display = "block";
+                                            }
+                                        </script>
                                     </div>
+                                
                                     <div class="col-4 border border-1 justify-content-center text-center">
-                                        <select id="select_@questionId" name="select_@questionId">
-                                            <option value="0">Короткий ответ</option>
-                                            <option value="1">Длинный ответ</option>
-                                            <option value="2">Чекбокс</option>
-                                        </select>
-                                        <button class="btn-close" type="button" 
-                                            onclick="deleteElement('question', 'questionPlace_@questionId')">
+                                    <select id="select_@questionId" name="select_@questionId"
+                                        onchange="selectOnChange(@questionId)">
+                                        <option value="0">Короткий ответ</option>
+                                        <option value="1">Длинный ответ</option>
+                                        <option value="2">Чекбокс</option>
+                                    </select>
+                                    <script type="text/javascript">
+                                        function selectOnChange(id) {
+                                            let select = document.getElementById("select_" + id);
+                                            if (select.value == 0) {
+                                                addShortInput(id);
+                                            } else if (select.value == 1) {
+                                                addLongInput(id);
+                                            } else {
+                                                addCheckboxInput(id);
+                                            }
+                                        }
+                                    </script>
+                                    <button class="btn-close" type="button"
+                                        onclick="deleteElement('question', 'questionPlace_@questionId')">
+                                    </button>
+                                        <button class="btn btn-primary" type="button" id="buttonCheckBox_@questionId"
+                                        onclick="addCheckBoxVariant('inputField_@questionId', '@questionId')">
+                                            +
                                         </button>
                                         @if (formQuestion.TypeId == "qshort")
                                         {
                                             <script>
                                                 document.getElementById("select_@questionId").selectedIndex = 0;
+                                                document.getElementById("buttonCheckBox_@questionId").style.display = "none";
                                             </script>
                                         }
                                         else if (formQuestion.TypeId == "qlong")
                                         {
                                             <script>
                                                 document.getElementById("select_@questionId").selectedIndex = 1;
+                                                document.getElementById("buttonCheckBox_@questionId").style.display = "none";
                                             </script>
                                         }
                                         else
                                         {
-                                            <button class="btn btn-primary" type="button" id="buttonCheckBox_@questionId"
-                                        onclick="addCheckBoxVariant('inputField_@questionId', '@questionId')">
-                                                +
-                                            </button>
+                                            
 
                                             <script>
                                                 document.getElementById("select_@questionId").selectedIndex = 2;
+                                                document.getElementById("buttonCheckBox_@questionId").style.display = "block";
                                             </script>
                                         }
 
@@ -167,34 +217,9 @@
             </div>
         </div>
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-        }
+        
 
         <script>
-            /*
-            function changeQuestionType(selectId, answerId, buttonId) {
-                let select = document.getElementById(selectId);
-                let answer = document.getElementById(answerId);
-                let buttonForCheckBox = document.getElementById(buttonId);
-                let answerType = select.value;
-                while (answer.firstChild) {
-                    answer.removeChild(answer.firstChild);
-                }
-                buttonForCheckBox.style.display = "none";
-                if (answerType == 0) {
-                    let answerInput = document.createElement("input");
-                    answerInput.setAttribute("type", "text");
-                    answerInput.setAttribute("class", "form-control");
-                    answerInput.setAttribute("placeholder", "Ответ");
-                    answer.appendChild(answerInput);
-                } else if (answerType == 1) {
-                    let answerInput = document.createElement("textarea");
-                    answerInput.setAttribute("class", "form-control");
-                    answer.appendChild(answerInput);
-                } else {
-                    buttonForCheckBox.style.display = "block";
-                }
-            }*/
-
             function addCheckBoxVariant(placeId, idForAll) {
 
                 let answer = document.getElementById(placeId);
@@ -247,9 +272,8 @@
                 // -----------grid---------------
                 let parent = document.getElementById("question");
                 let idForAll = 0;
-                if(parent.childElementCount != 0) {
+                if (parent.childElementCount != 0) {
                     let str = (parent.children[parent.childElementCount - 1]).getAttribute("name");
-                    alert(str);
                     idForAll = parseInt(str.split('_')[1]) + 1;
                 }
                 let place = document.createElement("div");
@@ -364,7 +388,7 @@
                 }
                 questionTypePlace.appendChild(buttonForCheckBox);
 
-                
+
             });
         </script>
 
@@ -385,7 +409,7 @@
                     document.getElementById("endDate").value = endDate;
                 </text>
             }
-                                                                                                                                                });
+                                                                                                                                                            });
         </script>
 
 
