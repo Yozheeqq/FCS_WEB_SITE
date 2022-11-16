@@ -19,13 +19,15 @@ namespace FCS_WebSite_v2.Controllers
         [Route("myforms/")]
         public IActionResult MyForms()
         {
-            LoadUserForms();
-            return View();
+            var forms = LoadUserForms();
+            return View(forms);
         }
 
-        private void LoadUserForms()
+        private List<Form> LoadUserForms()
         {
-
+            var forms = DBObjects.GetForm().Where(x=> x.Name != null && x.CreatorId ==
+                ((ClaimsIdentity)User.Identity).FindFirst(ClaimTypes.NameIdentifier).Value).ToList();
+            return forms;
         }
     }
 }

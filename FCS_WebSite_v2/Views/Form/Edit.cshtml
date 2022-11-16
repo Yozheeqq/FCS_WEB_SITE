@@ -1,6 +1,7 @@
 ﻿@using FCS_WebSite_v2.Data.Forms;
 @using FCS_WebSite_v2.Data.DB;
 @{
+    Layout = "_Layout";
 }
 @{
     ViewData["Title"] = "CreateForm";
@@ -27,8 +28,10 @@
                             <input type="text" class="form-control" id="formname" name="formname" value="Название" />
                             @if (Model.Item1.Name != null)
                             {
+                                string formName = Model.Item1.Name;
                                 <script>
-                                    document.getElementById("formname").value = '@Model.Item1.Name';
+
+                                    document.getElementById("formname").value = '@formName';
 
                                 </script>
                             }
@@ -48,7 +51,7 @@
                         <input type="date" id="startDate" name="startDate" />
                         <input type="date" id="endDate" name="endDate" />
                     </div>
-                </div>
+                </div>s
             </div>
             <div class="row">
                 <div class="col border border-1">
