@@ -14,6 +14,19 @@
             <div class="col border border-1">
             </div>
             <div class="col border border-1 ">
+                <div class="list-group">
+                    @foreach (var form in Model)
+                    {
+                        @using (Html.BeginForm("Edit", "Form", new { id = form.Id }, FormMethod.Get))
+                        {
+                            <button class="list-group-item list-group-item-action"
+                                style="margin-top: 10px; margin-bottom: 10px;">
+                                @form.Name
+                            </button>
+                        }
+                    }
+                </div>
+                <!--
                 <ol class="list-group">
                     @foreach (var form in Model)
                     {
@@ -28,7 +41,7 @@
                         }
                     }
                 </ol>
-
+                -->
             </div>
             <div class="col border border-1">
             </div>
