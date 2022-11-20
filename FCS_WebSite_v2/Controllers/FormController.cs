@@ -48,6 +48,10 @@ namespace FCS_WebSite_v2.Controllers
         public IActionResult Edit([FromRoute] string id)
         {
             var form = DBObjects.GetForm().Where(x => x.Id == id).First();
+            if(form.CreatorId != ((ClaimsIdentity)User.Identity).FindFirst(ClaimTypes.NameIdentifier).Value)
+            {
+                return Forbid();
+            }
             var formElements = DBObjects.GetFormQuestions().Where(x => x.FormId == id).ToList();
             SortQuestions(formElements);
             var model = new Tuple<Form, List<FormQuestion>>(form, formElements);
@@ -88,6 +92,30 @@ namespace FCS_WebSite_v2.Controllers
         [HttpPost("send/{id}")]
         public IActionResult SendForm(IFormCollection fc, string id)
         {
+            var userId = ((ClaimsIdentity)User.Identity).FindFirst(ClaimTypes.NameIdentifier).Value;
+            var formKeys = fc.Keys.Where(x => x.StartsWith("answer:")).ToList();
+            var groupedKeys = formKeys.GroupBy(x => x.Split(':')[1]).ToList();
+            
+            for(int i = 0; i < groupedKeys.Count(); i++)
+            {
+                var answersKeys = groupedKeys[i];
+                FormQuestionAnswer questionAnswer = new FormQuestionAnswer();
+                questionAnswer.UserId = userId;
+                questionAnswer.QuestionId = answersKeys.Key;
+                questionAnswer.FormTime = DateTime.Now;
+                for(int j = 0; j < answersKeys.Count(); j++)
+                {
+                    if(j != 0)
+                    {
+                        questionAnswer.Answers += ";";
+                    }
+                    questionAnswer.Answers += fc[answersKeys.ElementAt(j)];
+                }
+
+                DBObjects.InitialFormQuestionAnswer(questionAnswer);
+                
+            }
+
             return Redirect("/profile");
         }
 

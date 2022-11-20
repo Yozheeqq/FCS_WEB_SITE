@@ -37,15 +37,16 @@
                         string questionId = formQuestion.Id.Split(";;")[0].Split("_")[1];
                         <div id="questionPlace_@questionId" name="place_@questionId">
                             <div class="row">
-                                <div class="col">
+                                <div class="col border border-1">
                                     <p id="question_@questionId">@formQuestion.Content</p>
                                     @if (formQuestion.TypeId == "qshort")
                                     {
-                                        <input type="text" class="form-control" placeholder="Ответ" />
+                                        <input type="text" class="form-control" placeholder="Ответ" 
+                                            name="answer:@formQuestion.Id"/>
                                     }
                                     else if (formQuestion.TypeId == "qlong")
                                     {
-                                        <textarea class="form-control"></textarea>
+                                        <textarea class="form-control" name="answer:@formQuestion.Id"></textarea>
                                     }
                                     else if (formQuestion.TypeId == "qcheckbox")
                                     {
@@ -57,16 +58,15 @@
                                         for (int i = 1; i < checkboxSplited.Count; i++)
                                         {
                                             <div class="input-group mb-3" id="variantPlace_@(questionId)_@i">
-                                                <div class="input-group-text">
-                                                    <input class="form-check-input mt-0" type="checkbox" value="" aria-label="">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox"
+                                                        name="answer:@(formQuestion.Id):@i" id="answer:@(formQuestion.Id):@i"
+                                                        value="@checkboxSplited[i]">
+                                                    <label class="form-check-label" for="answer:@(formQuestion.Id):@i">
+                                                        @checkboxSplited[i]
+                                                    </label>
                                                 </div>
-                                                <input type="text" class="form-control" aria-label="" value="@checkboxSplited[i]"
-                                       name="inputPlace_@(questionId)_@i">
-                                                <button class="btn-close" type="button"
-                                        onclick="deleteElement('inputField_@questionId', 'variantPlace_@(questionId)_@i')">
-                                                </button>
                                             </div>
-
                                         }
                                     }
                                 </div>

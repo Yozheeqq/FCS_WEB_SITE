@@ -36,6 +36,12 @@ namespace FCS_WebSite_v2.Data.DB
             Content.SaveChanges();
         }
 
+        public static void InitialFormQuestionAnswer(FormQuestionAnswer formQuestionAnswer)
+        {
+            Content.FormQuestionAnswer.Add(formQuestionAnswer);
+            Content.SaveChanges();
+        }
+
         public static DbSet<Pupil> GetPupil()
         {
             return Content.Pupil;
@@ -54,6 +60,11 @@ namespace FCS_WebSite_v2.Data.DB
         public static DbSet<FormQuestion> GetFormQuestions()
         {
             return Content.FormQuestion;
+        }
+
+        public static DbSet<FormQuestionAnswer> GetFormQuestionAnswers()
+        {
+            return Content.FormQuestionAnswer;
         }
     }
 }

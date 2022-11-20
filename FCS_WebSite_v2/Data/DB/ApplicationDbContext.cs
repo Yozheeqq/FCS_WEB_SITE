@@ -39,5 +39,6 @@ namespace FCS_WebSite_v2.Data.DB
         public DbSet<Form> Form { set; get; }
         public DbSet<FormQuestion> FormQuestion { set; get; }
         public DbSet<QuestionType> QuestionType { set; get; }
+        public DbSet<FormQuestionAnswer> FormQuestionAnswer { set; get; }
     }
 }
