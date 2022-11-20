@@ -1,5 +1,6 @@
 ﻿using FCS_WebSite_v2.Data.DB;
 using FCS_WebSite_v2.Data.Forms;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
@@ -16,6 +17,7 @@ namespace FCS_WebSite_v2.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Teacher")]
         public IActionResult Edit(IFormCollection fc)
         {
             Form form = new Form()
@@ -42,6 +44,7 @@ namespace FCS_WebSite_v2.Controllers
 
         [HttpGet]
         [Route("edit/{id}")]
+        [Authorize(Roles = "Teacher")]
         public IActionResult Edit([FromRoute] string id)
         {
             var form = DBObjects.GetForm().Where(x => x.Id == id).First();
@@ -52,6 +55,7 @@ namespace FCS_WebSite_v2.Controllers
         }
 
         [HttpPost("{id}")]
+        [Authorize(Roles = "Teacher")]
         public IActionResult SaveForm(IFormCollection fc, string id)
         {
             SetFormAttributes(fc, id);
@@ -59,6 +63,32 @@ namespace FCS_WebSite_v2.Controllers
             CreateQuestions(fc, id);
 
             return Redirect("/profile/myforms");
+        }
+
+        [HttpPost("fill")]
+        public IActionResult Fill(IFormCollection fc)
+        {
+            var formId = fc["formId"];
+
+            return Redirect($"fill/{formId}");
+        }
+
+        [HttpGet]
+        [Route("fill/{id}")]
+        public IActionResult Fill([FromRoute] string id)
+        {
+            var formElements = DBObjects.GetFormQuestions().Where(x =>
+                x.FormId == id).ToList();
+            var form = DBObjects.GetForm().Where(x => x.Id == id).First();
+            SortQuestions(formElements);
+            var model = new Tuple<Form, List<FormQuestion>>(form, formElements);
+            return View(model);
+        }
+
+        [HttpPost("send/{id}")]
+        public IActionResult SendForm(IFormCollection fc, string id)
+        {
+            return Redirect("/profile");
         }
 
         private void DeletePreviousQuestions(string id)
