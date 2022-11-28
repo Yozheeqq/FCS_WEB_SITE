@@ -12,7 +12,14 @@ namespace FCS_WebSite_v2.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            var userId = ((ClaimsIdentity)User.Identity).FindFirst(ClaimTypes.NameIdentifier).Value;
+            var availableEvents = DBObjects.GetUserEvents().Where(x =>
+                x.UserId == userId
+            ).Select(x => x.EventId);
+            var availableForms = DBObjects.GetForm().Where(x => 
+            availableEvents.Contains(x.EventId) && x.IsRegistration == 0).ToList();
+
+            return View(availableForms);
         }
 
         [HttpGet]

@@ -13,5 +13,10 @@ namespace FCS_WebSite_v2.Data.Forms
         public string? EventId { get; set; }
         public string? CreatorId { get; set; }
 
+        // 1 - true
+        // 0 - false
+
+        public int IsRegistration { get; set; }
+
     }
 }

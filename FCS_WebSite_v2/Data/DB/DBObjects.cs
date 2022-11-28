@@ -42,6 +42,18 @@ namespace FCS_WebSite_v2.Data.DB
             Content.SaveChanges();
         }
 
+        public static void InitialEvent(Event event_)
+        {
+            Content.Event.Add(event_);
+            Content.SaveChanges();
+        }
+
+        public static void InitialUserEvent(UserEvent userEvent)
+        {
+            Content.UserEvent.Add(userEvent);
+            Content.SaveChanges();
+        }
+
         public static DbSet<Pupil> GetPupil()
         {
             return Content.Pupil;
@@ -65,6 +77,16 @@ namespace FCS_WebSite_v2.Data.DB
         public static DbSet<FormQuestionAnswer> GetFormQuestionAnswers()
         {
             return Content.FormQuestionAnswer;
+        }
+
+        public static DbSet<Event> GetEvents()
+        {
+            return Content.Event;
+        }
+
+        public static DbSet<UserEvent> GetUserEvents()
+        {
+            return Content.UserEvent;
         }
     }
 }

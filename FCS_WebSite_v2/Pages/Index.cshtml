@@ -3,4 +3,32 @@
 @{
     ViewData["Title"] = "Home page";
 }
+@{
+    Layout = "_Layout";
+}
+<head>
+
+</head>
+<body>
+    <form method="post">
+        <div class="container">
+            @foreach (var event_ in Model.Events)
+            {
+                <div class="row">
+                    <div class="col border border-1">
+                        @event_.Name
+                    </div>
+                    <div class="col border border-1">
+                    </div>
+                    <div class="col border border-1">
+                        <button type="submit" class="btn btn-primary" asp-route-eventId="@event_.Id">
+                            Зарегистрироваться
+                        </button>
+                    </div>
+                </div>
+            }
+        </div>
+    </form>
+    
+</body>
 

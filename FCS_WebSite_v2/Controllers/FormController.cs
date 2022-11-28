@@ -48,7 +48,7 @@ namespace FCS_WebSite_v2.Controllers
         public IActionResult Edit([FromRoute] string id)
         {
             var form = DBObjects.GetForm().Where(x => x.Id == id).First();
-            if(form.CreatorId != ((ClaimsIdentity)User.Identity).FindFirst(ClaimTypes.NameIdentifier).Value)
+            if (form.CreatorId != ((ClaimsIdentity)User.Identity).FindFirst(ClaimTypes.NameIdentifier).Value)
             {
                 return Forbid();
             }
@@ -70,10 +70,8 @@ namespace FCS_WebSite_v2.Controllers
         }
 
         [HttpPost("fill")]
-        public IActionResult Fill(IFormCollection fc)
+        public IActionResult Fill(IFormCollection fc, string formId)
         {
-            var formId = fc["formId"];
-
             return Redirect($"fill/{formId}");
         }
 
@@ -95,17 +93,17 @@ namespace FCS_WebSite_v2.Controllers
             var userId = ((ClaimsIdentity)User.Identity).FindFirst(ClaimTypes.NameIdentifier).Value;
             var formKeys = fc.Keys.Where(x => x.StartsWith("answer:")).ToList();
             var groupedKeys = formKeys.GroupBy(x => x.Split(':')[1]).ToList();
-            
-            for(int i = 0; i < groupedKeys.Count(); i++)
+
+            for (int i = 0; i < groupedKeys.Count(); i++)
             {
                 var answersKeys = groupedKeys[i];
                 FormQuestionAnswer questionAnswer = new FormQuestionAnswer();
                 questionAnswer.UserId = userId;
                 questionAnswer.QuestionId = answersKeys.Key;
                 questionAnswer.FormTime = DateTime.Now;
-                for(int j = 0; j < answersKeys.Count(); j++)
+                for (int j = 0; j < answersKeys.Count(); j++)
                 {
-                    if(j != 0)
+                    if (j != 0)
                     {
                         questionAnswer.Answers += ";";
                     }
@@ -113,7 +111,18 @@ namespace FCS_WebSite_v2.Controllers
                 }
 
                 DBObjects.InitialFormQuestionAnswer(questionAnswer);
-                
+
+            }
+
+            var form = DBObjects.GetForm().Where(x => x.Id == id).First();
+            if (form.IsRegistration == 1)
+            {
+                UserEvent userEvent = new UserEvent()
+                {
+                    UserId = userId,
+                    EventId = form.EventId
+                };
+                DBObjects.InitialUserEvent(userEvent);
             }
 
             return Redirect("/profile");
@@ -123,7 +132,7 @@ namespace FCS_WebSite_v2.Controllers
         {
             var list = DBObjects.GetFormQuestions().Where(x =>
                 x.FormId == id).ToList();
-            for(int i = 0; i < list.Count; i++)
+            for (int i = 0; i < list.Count; i++)
             {
                 DBObjects.Content.FormQuestion.Remove(list[i]);
             }
@@ -138,7 +147,7 @@ namespace FCS_WebSite_v2.Controllers
         private void CreateQuestions(IFormCollection fc, string id)
         {
             var formKeys = fc.Keys.Where(x => x.StartsWith("select_")).ToList();
-            for(int i = 0; i < formKeys.Count; i++)
+            for (int i = 0; i < formKeys.Count; i++)
             {
                 FormQuestion formQuestion = new FormQuestion();
                 formQuestion.FormId = id;
@@ -158,12 +167,12 @@ namespace FCS_WebSite_v2.Controllers
                 var idForAll = formKeys[i].Split('_')[1];
                 var inputKey = "questionInput_" + idForAll;
                 formQuestion.Content = fc[inputKey];
-                if(fc[formKeys[i]] == "2")
+                if (fc[formKeys[i]] == "2")
                 {
                     var keyForCheckboxAns = "inputPlace_" + idForAll;
                     var checkBoxAnswers = fc.Keys.
                         Where(x => x.StartsWith(keyForCheckboxAns)).ToList();
-                    for(int j = 0; j < checkBoxAnswers.Count; j++)
+                    for (int j = 0; j < checkBoxAnswers.Count; j++)
                     {
                         var answer = fc[checkBoxAnswers[j]];
                         formQuestion.Content += ";" + answer;
@@ -178,7 +187,11 @@ namespace FCS_WebSite_v2.Controllers
             var form = DBObjects.GetForm().Where(x => x.Id == formId).First();
             form.Name = fc["formname"];
             var ifDate = fc["ifdate"];
-            if(!String.IsNullOrEmpty(ifDate))
+            var isRegistration = fc["isRegistration"];
+
+            form.IsRegistration = !String.IsNullOrEmpty(isRegistration) ? 1 : 0;
+
+            if (!String.IsNullOrEmpty(ifDate))
             {
                 var startDates = fc["startDate"].ToString().Split('-').
                     Select(x => int.Parse(x)).ToList();
@@ -190,7 +203,8 @@ namespace FCS_WebSite_v2.Controllers
                     endDates[0], endDates[1], endDates[2]);
                 form.StartDate = startDate;
                 form.EndDate = endDate;
-            } else
+            }
+            else
             {
                 form.StartDate = null;
                 form.EndDate = null;

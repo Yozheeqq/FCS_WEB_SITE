@@ -30,6 +30,10 @@ namespace FCS_WebSite_v2.Data.DB
             {
                 entity.ToTable("UserRoles");
             });
+            builder.Entity<UserEvent>().HasKey(table => new
+            {
+                table.UserId, table.EventId
+            });
         }
 
         public DbSet<Pupil> Pupil { set; get; }
@@ -40,5 +44,6 @@ namespace FCS_WebSite_v2.Data.DB
         public DbSet<FormQuestion> FormQuestion { set; get; }
         public DbSet<QuestionType> QuestionType { set; get; }
         public DbSet<FormQuestionAnswer> FormQuestionAnswer { set; get; }
+        public DbSet<UserEvent> UserEvent { set; get; }
     }
 }

@@ -31,6 +31,9 @@ namespace FCS_WebSite_v2.Migrations
                     b.Property<string>("CreatorId")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("IsAvailable")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
@@ -53,6 +56,9 @@ namespace FCS_WebSite_v2.Migrations
 
                     b.Property<string>("EventId")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("IsRegistration")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -121,6 +127,19 @@ namespace FCS_WebSite_v2.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("QuestionType", "Identity");
+                });
+
+            modelBuilder.Entity("FCS_WebSite_v2.Data.Forms.UserEvent", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("EventId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("UserId", "EventId");
+
+                    b.ToTable("UserEvent", "Identity");
                 });
 
             modelBuilder.Entity("FCS_WebSite.Models.Pupil", b =>
