@@ -10,7 +10,9 @@ using FCS_WebSite_v2.Data;
 using FCS_WebSite.Models;
 
 var builder = WebApplication.CreateBuilder(args);
-
+/*
+var connectionString = builder.Configuration.GetConnectionString("FCS_WebSite_v2ContextConnection") ?? throw new InvalidOperationException("Connection string 'FCS_WebSite_v2ContextConnection' not found.");
+*/
 // Root of DB configuration
 IConfigurationRoot confRoot = new ConfigurationBuilder().SetBasePath(
     builder.Environment.ContentRootPath).AddJsonFile("Data/DB/dbsettings.json").Build();
@@ -24,6 +26,10 @@ builder.Services.AddControllersWithViews();
 // Add Sql Connection
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(confRoot.GetConnectionString("DefaultConnection")));
+
+/*
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores<FCS_WebSite_v2Context>();*/
 
 // Add Identity
 builder.Services.AddIdentity<User, IdentityRole>().

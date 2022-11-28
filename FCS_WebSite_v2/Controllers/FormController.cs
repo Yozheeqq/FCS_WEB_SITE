@@ -2,6 +2,7 @@
 using FCS_WebSite_v2.Data.Forms;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Security.Claims;
 
 namespace FCS_WebSite_v2.Controllers
@@ -70,6 +71,7 @@ namespace FCS_WebSite_v2.Controllers
         }
 
         [HttpPost("fill")]
+        [Authorize]
         public IActionResult Fill(IFormCollection fc, string formId)
         {
             return Redirect($"fill/{formId}");
@@ -77,6 +79,7 @@ namespace FCS_WebSite_v2.Controllers
 
         [HttpGet]
         [Route("fill/{id}")]
+        [Authorize]
         public IActionResult Fill([FromRoute] string id)
         {
             var formElements = DBObjects.GetFormQuestions().Where(x =>
@@ -88,6 +91,7 @@ namespace FCS_WebSite_v2.Controllers
         }
 
         [HttpPost("send/{id}")]
+
         public IActionResult SendForm(IFormCollection fc, string id)
         {
             var userId = ((ClaimsIdentity)User.Identity).FindFirst(ClaimTypes.NameIdentifier).Value;
@@ -144,6 +148,16 @@ namespace FCS_WebSite_v2.Controllers
             formQuestions.OrderBy(x => int.Parse(x.TypeId.Split('_')[1]));
         }
 
+        [Route("delete/{id}")]
+        [HttpGet]
+        public IActionResult DeleteForm([FromRoute] string id)
+        {
+            var form = DBObjects.GetForm().Where(x => x.Id == id).First();
+            DBObjects.GetForm().Remove(form);
+            DBObjects.Content.SaveChanges();
+            return Redirect("/profile/myforms");
+        }
+
         private void CreateQuestions(IFormCollection fc, string id)
         {
             var formKeys = fc.Keys.Where(x => x.StartsWith("select_")).ToList();
@@ -188,8 +202,15 @@ namespace FCS_WebSite_v2.Controllers
             form.Name = fc["formname"];
             var ifDate = fc["ifdate"];
             var isRegistration = fc["isRegistration"];
-
-            form.IsRegistration = !String.IsNullOrEmpty(isRegistration) ? 1 : 0;
+            var eventId = form.EventId;
+            // Проверяем, что это единственная форма для регистрации
+            var isRegisterFormExist = DBObjects.GetForm().Where(x => x.EventId == eventId &&
+                x.IsRegistration == 1).Any();
+            if(isRegisterFormExist)
+            {
+                form.IsRegistration = !String.IsNullOrEmpty(isRegistration) ? 1 : 0;
+            }
+            
 
             if (!String.IsNullOrEmpty(ifDate))
             {

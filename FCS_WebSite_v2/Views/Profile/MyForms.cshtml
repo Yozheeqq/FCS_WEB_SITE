@@ -11,39 +11,32 @@
 <body>
     <div class="container">
         <div class="row" style="margin-top: 5%;">
-            <div class="col border border-1">
+            <div class="col-2 border border-1">
             </div>
             <div class="col border border-1 ">
                 <div class="list-group">
                     @foreach (var form in Model)
                     {
-                        @using (Html.BeginForm("Edit", "Form", new { id = form.Id }, FormMethod.Get))
-                        {
-                            <button class="list-group-item list-group-item-action"
-                                style="margin-top: 10px; margin-bottom: 10px;">
-                                @form.Name
-                            </button>
-                        }
+                        <div style="display: inline">
+                            <div class="list-group list-group-horizontal">
+                                @using (Html.BeginForm("Edit", "Form", new { id = form.Id }, FormMethod.Get))
+                                {
+                                    <button class="list-group-item list-group-item-action"
+                                    style="margin-top: 10px; margin-bottom: 10px;">
+                                        @form.Name
+                                    </button>
+                                }
+                                @using (Html.BeginForm("DeleteForm", "Form", new { id = form.Id }, FormMethod.Get))
+                                {
+                                    <button class="btn-close" aria-label="Close"></button>
+                                }
+                            </div>
+                        </div>
+                        
                     }
                 </div>
-                <!--
-                <ol class="list-group">
-                    @foreach (var form in Model)
-                    {
-                        @using (Html.BeginForm("Edit", "Form", new { id = form.Id }, FormMethod.Get))
-                        {
-                            <li class="list-group-item">
-                                <button class="btn btn-outline-primary" 
-                                    style="margin-top: 10px; margin-bottom: 10px;">
-                                    @form.Name
-                                </button>
-                            </li>
-                        }
-                    }
-                </ol>
-                -->
             </div>
-            <div class="col border border-1">
+            <div class="col-2 border border-1">
             </div>
         </div>
     </div>
