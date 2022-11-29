@@ -206,7 +206,7 @@ namespace FCS_WebSite_v2.Controllers
             // Проверяем, что это единственная форма для регистрации
             var isRegisterFormExist = DBObjects.GetForm().Where(x => x.EventId == eventId &&
                 x.IsRegistration == 1).Any();
-            if(isRegisterFormExist)
+            if(!isRegisterFormExist)
             {
                 form.IsRegistration = !String.IsNullOrEmpty(isRegistration) ? 1 : 0;
             }
