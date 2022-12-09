@@ -67,7 +67,7 @@ namespace FCS_WebSite_v2.Controllers
             ).Select(x => x.EventId);
             var availableForms = DBObjects.GetForm().Where(x =>
             availableEvents.Contains(x.EventId) && x.IsRegistration == 0).ToList();
-            var events = DBObjects.GetEvents();
+            var events = DBObjects.GetEvents().ToList();
             string eventId = DBObjects.GetEvents().Where(x => x.Name == eventName).
                     First().Id;
             ViewBag.CurrentEventId = eventId;

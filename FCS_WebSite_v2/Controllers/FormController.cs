@@ -21,7 +21,7 @@ namespace FCS_WebSite_v2.Controllers
         [Authorize(Roles = "Teacher")]
         public IActionResult Edit(IFormCollection fc, string eventId)
         {
-            if(eventId == null)
+            if (eventId == null)
             {
                 return Redirect("/profile");
             }
@@ -90,7 +90,7 @@ namespace FCS_WebSite_v2.Controllers
                 x.FormId == id).ToList();
             var form = DBObjects.GetForm().Where(x => x.Id == id).First();
             // Если прошел дедлайн формы
-            if(form.EndDate != null && form.EndDate < DateTime.Now)
+            if (form.EndDate != null && form.EndDate < DateTime.Now)
             {
                 return Forbid();
             }
@@ -157,6 +157,55 @@ namespace FCS_WebSite_v2.Controllers
             formQuestions.OrderBy(x => int.Parse(x.TypeId.Split('_')[1]));
         }
 
+        [HttpPost]
+        [Route("copyform")]
+        public IActionResult CopyForm(IFormCollection fc)
+        {
+            string formId = fc["availableForms"];
+            string eventName = fc["availableEvents"];
+
+            Form copyForm = DBObjects.GetForm().Where(x => x.Id == formId).Single();
+            Event @event = DBObjects.GetEvents().Where(x => x.Name == eventName).Single();
+
+            if (copyForm.EventId == @event.Id)
+            {
+                return Redirect("/profile");
+            }
+
+            Form newForm = new Form()
+            {
+                Name = copyForm.Name,
+                StartDate = copyForm.StartDate,
+                EndDate = copyForm.EndDate,
+                CreatorId = copyForm.CreatorId,
+                EventId = @event.Id,
+                IsRegistration = copyForm.IsRegistration
+            };
+
+            DBObjects.InitialForm(newForm);
+
+            List<FormQuestion> copyFormQuestions = DBObjects.GetFormQuestions().
+                Where(x => x.FormId == copyForm.Id).ToList();
+
+            foreach (var question in copyFormQuestions)
+            {
+                string id = question.Id.Split(";;")[0];
+                FormQuestion newFormQuestion = new FormQuestion()
+                {
+                    Id = id + ";;" + newForm.Id,
+                    Content = question.Content,
+                    TypeId = question.TypeId,
+                    Answers = question.Answers,
+                    FormId = newForm.Id
+                };
+                DBObjects.InitialFormQuestion(newFormQuestion);
+            }
+
+            
+
+            return Redirect("/profile");
+        }
+
         [Route("delete/{id}")]
         [HttpGet]
         public IActionResult DeleteForm([FromRoute] string id)
@@ -215,11 +264,11 @@ namespace FCS_WebSite_v2.Controllers
             // Проверяем, что это единственная форма для регистрации
             var isRegisterFormExist = DBObjects.GetForm().Where(x => x.EventId == eventId &&
                 x.IsRegistration == 1).Any();
-            if(!isRegisterFormExist)
+            if (!isRegisterFormExist)
             {
                 form.IsRegistration = !String.IsNullOrEmpty(isRegistration) ? 1 : 0;
             }
-            
+
 
             if (!String.IsNullOrEmpty(ifDate))
             {

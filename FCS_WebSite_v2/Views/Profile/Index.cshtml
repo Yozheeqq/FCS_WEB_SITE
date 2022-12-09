@@ -51,7 +51,7 @@
                 </div>
                 <div class="col-5 border border-1 justify-content-center text-center">
                     <div class="list-group" id="formPlace">
-                        @foreach (var form in Model.Item3)
+                        @foreach (Form form in Model.Item3)
                         {
                             <div style="display: inline">
                                 <div class="list-group list-group-horizontal">
@@ -65,11 +65,11 @@
                                         }
                                         @using (Html.BeginForm("DeleteForm", "Form", new { id = form.Id }, FormMethod.Get))
                                         {
-                                            <button class="btn btn-outline-danger">X</button>
+                                            <button class="btn btn-outline-danger">
+                                                X
+                                            </button>
                                         }
-                                    </div>
-                                    
-                                    
+                                    </div> 
                                 </div>
                             </div>
                         }
@@ -80,12 +80,60 @@
                                 Создать форму
                             </button>
                         }
+                        @using (Html.BeginForm("CopyForm", "Form", FormMethod.Post))
+                        {
+                            <button class="btn btn-outline-dark" type="button"
+                            data-bs-toggle="modal" data-bs-target="#copyForm">
+                                Копировать
+                            </button>
+                            <!-- Modal CopyForm -->
+                            <div class="modal fade" id="copyForm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Копировать форму</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="input-group mb-3">
+                                                <label class="input-group-text" for="availableEvents">Мероприятие</label>
+                                                <select class="form-select" id="availableEvents" name="availableEvents">
+                                                    @{
+                                                        List<Event> events = Model.Item2;
+                                                        for (int i = 0; i < events.Count; i++)
+                                                        {
+                                                            <option value="@events[i].Name">@events[i].Name</option>
+                                                        }
+                                                    }
+                                                </select>
+                                            </div>
+                                            <div class="input-group mb-3">
+                                                <label class="input-group-text" for="availableForms">Форма</label>
+                                                <select class="form-select" id="availableForms" name="availableForms">
+                                                    @{
+                                                        List<Form> forms = Model.Item3;
+                                                        for (int i = 0; i < forms.Count; i++)
+                                                        {
+                                                            <option value="@forms[i].Id">@forms[i].Name</option>
+                                                        }
+                                                    }
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                                            <button type="submit" class="btn btn-primary">Копировать</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
                     </div>
                 </div>
                 <div class="col border border-1">
                 </div>
 
-                <!-- Modal -->
+                <!-- Modal CreateNewEvent -->
                 @using (Html.BeginForm("CreateNewEvent", "Profile", FormMethod.Post))
                 {
                     <div class="modal fade" id="addEvent" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -106,6 +154,11 @@
                         </div>
                     </div>
                 }
+
+                
+                
+
+
 
 
                 <!--
