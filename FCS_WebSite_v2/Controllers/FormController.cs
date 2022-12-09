@@ -19,12 +19,16 @@ namespace FCS_WebSite_v2.Controllers
 
         [HttpPost]
         [Authorize(Roles = "Teacher")]
-        public IActionResult Edit(IFormCollection fc)
+        public IActionResult Edit(IFormCollection fc, string eventId)
         {
+            if(eventId == null)
+            {
+                return Redirect("/profile");
+            }
             Form form = new Form()
             {
                 // id генерируется автоматически
-                EventId = "tstevent", // тоже брать ивент из контекста
+                EventId = eventId, // тоже брать ивент из контекста
                 CreatorId = ((ClaimsIdentity)User.Identity).FindFirst(ClaimTypes.NameIdentifier).Value
             };
             DBObjects.InitialForm(form);
@@ -67,7 +71,7 @@ namespace FCS_WebSite_v2.Controllers
             DeletePreviousQuestions(id);
             CreateQuestions(fc, id);
 
-            return Redirect("/profile/myforms");
+            return Redirect("/profile");
         }
 
         [HttpPost("fill")]
@@ -85,6 +89,11 @@ namespace FCS_WebSite_v2.Controllers
             var formElements = DBObjects.GetFormQuestions().Where(x =>
                 x.FormId == id).ToList();
             var form = DBObjects.GetForm().Where(x => x.Id == id).First();
+            // Если прошел дедлайн формы
+            if(form.EndDate != null && form.EndDate < DateTime.Now)
+            {
+                return Forbid();
+            }
             SortQuestions(formElements);
             var model = new Tuple<Form, List<FormQuestion>>(form, formElements);
             return View(model);
@@ -155,7 +164,7 @@ namespace FCS_WebSite_v2.Controllers
             var form = DBObjects.GetForm().Where(x => x.Id == id).First();
             DBObjects.GetForm().Remove(form);
             DBObjects.Content.SaveChanges();
-            return Redirect("/profile/myforms");
+            return Redirect("/profile");
         }
 
         private void CreateQuestions(IFormCollection fc, string id)
