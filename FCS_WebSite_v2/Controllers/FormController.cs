@@ -59,7 +59,9 @@ namespace FCS_WebSite_v2.Controllers
             }
             var formElements = DBObjects.GetFormQuestions().Where(x => x.FormId == id).ToList();
             SortQuestions(formElements);
-            var model = new Tuple<Form, List<FormQuestion>>(form, formElements);
+            var registerFormEndDate = DBObjects.GetForm().Where(x => x.EventId == form.EventId &&
+                x.IsRegistration == 1).First().EndDate;
+            var model = (form, formElements, registerFormEndDate);
             return View(model);
         }
 
