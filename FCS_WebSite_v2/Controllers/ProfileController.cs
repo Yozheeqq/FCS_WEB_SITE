@@ -16,14 +16,32 @@ namespace FCS_WebSite_v2.Controllers
         public IActionResult Index()
         {
             var userId = ((ClaimsIdentity)User.Identity).FindFirst(ClaimTypes.NameIdentifier).Value;
+            // Все меро, куда зарегался ученик
             var availableEvents = DBObjects.GetUserEvents().Where(x =>
                 x.UserId == userId
             ).Select(x => x.EventId);
+
+            // Все доступные формы для ученика
             var availableForms = DBObjects.GetForm().Where(x => 
             availableEvents.Contains(x.EventId) && x.IsRegistration == 0).ToList();
+
             var events = DBObjects.GetEvents().ToList();
             var allForms = new List<Form>();
-            var model = (availableForms, events, allForms);
+            
+
+
+            var customForm = from e in events
+                       join af in availableForms on e.Id equals af.EventId
+                       orderby af.EventId
+                       select new
+                       {
+                           EventName = e.Name,
+                           FormName = af.Name,
+                           FormId = af.Id
+                       };
+
+            var model = (customForm, events, allForms);
+
             return View(model);
         }
 
