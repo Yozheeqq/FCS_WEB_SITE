@@ -137,7 +137,11 @@
                     </div>
                 </div>
                 <div class="col border border-1">
-
+                    <h4>Информация по ученику</h4>
+                    <button class="btn btn-outline-secondary"
+                    data-bs-toggle="modal" data-bs-target="#pupilInfo">
+                        Получить все ответы
+                    </button>
                 </div>
 
                 <!-- Modal CreateNewEvent -->
@@ -162,28 +166,28 @@
                     </div>
                 }
 
-                
-                
-
-
-
-
-                <!--
-                    <div class="col border border-1 justify-content-center text-center">
-                @using (Html.BeginForm("MyForms", "Profile", FormMethod.Get))
+                <!-- Modal PupilInfo -->
+                @using (Html.BeginForm("PupilInfo", "Form", FormMethod.Post))
                 {
-                                                    <button class="btn btn-primary" style="margin-bottom: 20px">
-                                                        Мои формы
-                                                    </button>
+                    <div class="modal fade" id="pupilInfo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Информация по ученику</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <input type="text" name="firstName" placeholder="Имя" />
+                                    <input type="text" name="lastName" placeholder="Фамилия" />
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                                    <button type="submit" class="btn btn-primary">Показать</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 }
-                @using (Html.BeginForm("Edit", "Form", FormMethod.Post))
-                {
-                                                    <button class="btn btn-primary" style="margin-bottom: 20px">
-                                                        Создать форму
-                                                    </button>
-                }
-                </div>
-                -->
             </div>
         </div>
     }

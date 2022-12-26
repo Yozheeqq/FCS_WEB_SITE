@@ -1,8 +1,10 @@
-﻿using FCS_WebSite_v2.Data.DB;
+﻿using FCS_WebSite.Models;
+using FCS_WebSite_v2.Data.DB;
 using FCS_WebSite_v2.Data.Forms;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Data.SqlClient.Server;
 using System.Security.Claims;
 
 namespace FCS_WebSite_v2.Controllers
@@ -157,6 +159,32 @@ namespace FCS_WebSite_v2.Controllers
         private void SortQuestions(List<FormQuestion> formQuestions)
         {
             formQuestions.OrderBy(x => int.Parse(x.TypeId.Split('_')[1]));
+        }
+
+        [HttpPost]
+        [Route("pupil_info")]
+        public IActionResult PupilInfo(IFormCollection fc)
+        {
+            string firstName = fc["firstName"];
+            string lastName = fc["lastName"];
+            var formQA = DBObjects.GetFormQuestionAnswers();
+            var pupils = DBObjects.GetPupil();
+            var formQ = DBObjects.GetFormQuestions();
+            var forms = DBObjects.GetForm();
+            var pupilData = from fqa in formQA
+                            join p in pupils on fqa.UserId equals p.Id
+                            join fq in formQ on fqa.QuestionId equals fq.Id
+                            join f in forms on fq.FormId equals f.Id
+                            where p.FirstName == firstName && p.LastName == lastName
+                            orderby f.Name
+                            select new
+                            {
+                                FormName = f.Name,
+                                Question = fq.Content,
+                                Answers = fqa.Answers
+                            };
+            var model = (pupilData, firstName, lastName);
+            return View(model);
         }
 
         [HttpPost]
