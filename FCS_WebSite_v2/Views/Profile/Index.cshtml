@@ -51,36 +51,47 @@
                 </div>
                 <div class="col-5 border border-1 justify-content-center text-center">
                     <h4>Формы для мероприятия</h4>
-                    <div class="list-group" id="formPlace">
-                        @foreach (Form form in Model.Item3)
-                        {
-                            <div style="display: inline">
-                                <div class="list-group list-group-horizontal">
-                                    <div class="input-group mb-3" style="box-sizing: border-box; width: 100%">
+                    <table class="table">
+                        <tbody>
+                            @{int formIndex = 1;}
+                            @foreach (Form form in Model.Item3)
+                            {
+                                <tr>
+                                    <th>@formIndex</th>
+                                    <td>
                                         @using (Html.BeginForm("Edit", "Form", new { id = form.Id }, FormMethod.Get))
                                         {
                                             <button class="btn btn-outline-secondary"
-                                                style="margin-right: 10px">
+                                        style="margin-right: 10px;">
                                                 @form.Name
                                             </button>
                                         }
+                                    </td>
+                                    <td>
                                         @using (Html.BeginForm("DeleteForm", "Form", new { id = form.Id }, FormMethod.Get))
                                         {
                                             <button class="btn btn-outline-danger">
                                                 X
                                             </button>
                                         }
-                                        @using (Html.BeginForm("FormInfo", "Form", new { id = form.Id}, FormMethod.Get)) {
+                                    </td>
+                                    <td>
+                                        @using (Html.BeginForm("FormInfo", "Form", new { id = form.Id }, FormMethod.Get))
+                                        {
                                             <button class="btn btn-outline-info">
                                                 Инфо
                                             </button>
                                         }
-                                    </div> 
-                                </div>
-                            </div>
-                        }
-                        @using (Html.BeginForm("Edit", "Form", 
-                            new { eventId = ViewBag.CurrentEventId}, FormMethod.Post))
+                                    </td>
+                                </tr>
+                                formIndex++;
+                            }
+                        </tbody>
+                    </table>
+                    <div class="list-group" id="formPlace">
+
+                        @using (Html.BeginForm("Edit", "Form",
+                       new { eventId = ViewBag.CurrentEventId }, FormMethod.Post))
                         {
                             <button class="btn btn-primary" style="margin-bottom: 20px">
                                 Создать форму
@@ -108,7 +119,7 @@
                                                         List<Event> events = Model.Item2;
                                                         for (int i = 0; i < events.Count; i++)
                                                         {
-                                                                <option value="@events[i].Name">@events[i].Name</option>
+                                                            <option value="@events[i].Name">@events[i].Name</option>
                                                         }
                                                     }
                                                 </select>
@@ -120,7 +131,7 @@
                                                         List<Form> forms = Model.Item3;
                                                         for (int i = 0; i < forms.Count; i++)
                                                         {
-                                                                <option value="@forms[i].Id">@forms[i].Name</option>
+                                                            <option value="@forms[i].Id">@forms[i].Name</option>
                                                         }
                                                     }
                                                 </select>
@@ -136,10 +147,10 @@
                         }
                     </div>
                 </div>
-                <div class="col border border-1">
+                <div class="col border border-1 justify-content-center text-center">
                     <h4>Информация по ученику</h4>
                     <button class="btn btn-outline-secondary"
-                    data-bs-toggle="modal" data-bs-target="#pupilInfo">
+                        data-bs-toggle="modal" data-bs-target="#pupilInfo">
                         Получить все ответы
                     </button>
                 </div>

@@ -62,7 +62,11 @@ namespace FCS_WebSite_v2.Controllers
             var formElements = DBObjects.GetFormQuestions().Where(x => x.FormId == id).ToList();
             SortQuestions(formElements);
             var registerFormEndDate = DBObjects.GetForm().Where(x => x.EventId == form.EventId &&
-                x.IsRegistration == 1).First().EndDate;
+                x.IsRegistration == 1).FirstOrDefault()?.EndDate;
+            if (registerFormEndDate == null)
+            {
+                registerFormEndDate = DateTime.MinValue;
+            }
             var model = (form, formElements, registerFormEndDate);
             return View(model);
         }
@@ -201,12 +205,15 @@ namespace FCS_WebSite_v2.Controllers
             var formQA = DBObjects.GetFormQuestionAnswers();
             var pupils = DBObjects.GetPupil();
             var formQ = DBObjects.GetFormQuestions();
-            var model = from fqa in formQA
+            var formInfo = from fqa in formQA
                         join p in pupils on fqa.UserId equals p.Id
                         join fq in formQ on fqa.QuestionId equals fq.Id
                         where fq.FormId == id
                         select new {FirstName = p.FirstName, LastName = p.LastName, 
                                     Question = fq.Content, Answers = fqa.Answers};
+            string? formName = DBObjects.GetForm().Where(x => x.Id == id).FirstOrDefault()?.Name;
+            // Таблица с данными + название формы
+            var model = (formInfo, formName);
             // Текущая форма, откуда будем получать информацию
             // Pupil.FirstName, Pupil.LastName, FormQuestion.Content, FormQuestionAnswers.Answer
             return View(model);
@@ -255,8 +262,6 @@ namespace FCS_WebSite_v2.Controllers
                 };
                 DBObjects.InitialFormQuestion(newFormQuestion);
             }
-
-            
 
             return Redirect("/profile");
         }
@@ -323,7 +328,6 @@ namespace FCS_WebSite_v2.Controllers
             {
                 form.IsRegistration = !String.IsNullOrEmpty(isRegistration) ? 1 : 0;
             }
-
 
             if (!String.IsNullOrEmpty(ifDate))
             {

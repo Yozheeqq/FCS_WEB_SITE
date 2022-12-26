@@ -27,7 +27,7 @@
                 @{
                     int index = 1;
                 }
-                @foreach (var pupil in Model)
+                @foreach (var pupil in Model.Item1)
                 {
                     <tr>
                         <th data-t="n" scope="row">@index</th>
@@ -47,8 +47,10 @@
     <script type="text/javascript">
         function exportReportToExcel() {
             let table = document.getElementById("infoTable");
+            let formName = "@(Model.Item2)";
+            let fileName = formName + '.xlsx';
             TableToExcel.convert(table, {
-                name: `pupils.xlsx`,
+                name: fileName,
                 sheet: {
                     name: 'Sheet 1'
                 }

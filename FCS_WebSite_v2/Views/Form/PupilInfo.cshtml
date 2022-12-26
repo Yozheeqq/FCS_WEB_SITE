@@ -50,7 +50,7 @@
         function exportReportToExcel() {
             let table = document.getElementById("infoTable");
             TableToExcel.convert(table, {
-                name: `pupilInfo.xlsx`,
+                name: `@(Model.Item2)_@(Model.Item3).xlsx`,
                 sheet: {
                     name: 'Sheet 1'
                 }

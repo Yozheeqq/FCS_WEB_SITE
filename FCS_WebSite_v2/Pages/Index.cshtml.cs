@@ -41,7 +41,13 @@ namespace FCS_WebSite_v2.Pages
             }
             var registerForm = DBObjects.GetForm().Where(x =>
                 x.EventId == eventId && x.IsRegistration == 1
-            ).First();
+            ).FirstOrDefault();
+
+            // Если нет формы регистрации на меро
+            if(registerForm == null)
+            {
+                return NotFound();
+            }
 
             return Redirect($"form/fill/{registerForm.Id}");
         }
