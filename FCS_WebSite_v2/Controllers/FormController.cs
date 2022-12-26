@@ -160,6 +160,31 @@ namespace FCS_WebSite_v2.Controllers
         }
 
         [HttpPost]
+        [Route("info")]
+        public IActionResult FormInfo(IFormCollection fc, string id)
+        {
+            return Redirect($"info/{id}");
+        }
+
+        [HttpGet]
+        [Route("info/{id}")]
+        public IActionResult FormInfo([FromRoute] string id)
+        {
+            var formQA = DBObjects.GetFormQuestionAnswers();
+            var pupils = DBObjects.GetPupil();
+            var formQ = DBObjects.GetFormQuestions();
+            var model = from fqa in formQA
+                        join p in pupils on fqa.UserId equals p.Id
+                        join fq in formQ on fqa.QuestionId equals fq.Id
+                        where fq.FormId == id
+                        select new {FirstName = p.FirstName, LastName = p.LastName, 
+                                    Question = fq.Content, Answers = fqa.Answers};
+            // Текущая форма, откуда будем получать информацию
+            // Pupil.FirstName, Pupil.LastName, FormQuestion.Content, FormQuestionAnswers.Answer
+            return View(model);
+        }
+
+        [HttpPost]
         [Route("copyform")]
         public IActionResult CopyForm(IFormCollection fc)
         {

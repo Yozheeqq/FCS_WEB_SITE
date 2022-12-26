@@ -1,0 +1,67 @@
+﻿@{
+    Layout = "_Layout";
+}
+
+<head>
+    <link rel="stylesheet" href="~/css/form/forminfo.css"/>
+    <script type="text/javascript" src="~/js/tableToExcel.js"></script>
+</head>
+<body>
+    <div>
+        <button type="button" class="btn btn-primary" onclick="exportReportToExcel(this)">
+            Экспорт в Excel
+        </button>
+    </div>
+    <div class="table-responsive">
+        <table id="infoTable" class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Фамилия</th>
+                    <th scope="col">Имя</th>
+                    <th scope="col">Вопрос</th>
+                    <th scope="col">Ответы</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    int index = 1;
+                }
+                @foreach (var pupil in Model)
+                {
+                    <tr>
+                        <th data-t="n" scope="row">@index</th>
+                        <td>@pupil.LastName</td>
+                        <td>@pupil.FirstName</td>
+                        <td>@pupil.Question</td>
+                        <td>@pupil.Answers</td>
+                    </tr>
+                    index++;
+                }
+                @for(int i = 0; i < 50; i++) {
+                    <tr>
+                        <th data-t="n" scope="row">@i</th>
+                        <td>Имя</td>
+                        <td>Фамилия</td>
+                        <td>Впорсо</td>
+                        <td>Ответ</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <script src="~/js/fileInfo.js">
+    </script>
+    <script type="text/javascript">
+        function exportReportToExcel() {
+            let table = document.getElementById("infoTable");
+            TableToExcel.convert(table, {
+                name: `pupils.xlsx`,
+                sheet: {
+                    name: 'Sheet 1'
+                }
+            });
+        }
+    </script>
+</body>

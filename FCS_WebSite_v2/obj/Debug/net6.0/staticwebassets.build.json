@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "vVcgnYNOjrR7SrYk8e5aWnxg237bSn9tVxVsbkqXCGI=",
+  "Hash": "x4yaqHgSMUwj4yf4n0chZis3NE5NeQJ4N2CbkVZfilY=",
   "Source": "FCS_WebSite_v2",
   "BasePath": "_content/FCS_WebSite_v2",
   "Mode": "Default",
@@ -1156,6 +1156,23 @@
       "OriginalItemSpec": "wwwroot\\css\\form\\edit.css"
     },
     {
+      "Identity": "C:\\Users\\anvar\\Documents\\GitHub\\FCS_WEB_SITE\\FCS_WebSite_v2\\wwwroot\\css\\form\\forminfo.css",
+      "SourceId": "FCS_WebSite_v2",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\anvar\\Documents\\GitHub\\FCS_WEB_SITE\\FCS_WebSite_v2\\wwwroot\\",
+      "BasePath": "_content/FCS_WebSite_v2",
+      "RelativePath": "css/form/forminfo.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\form\\forminfo.css"
+    },
+    {
       "Identity": "C:\\Users\\anvar\\Documents\\GitHub\\FCS_WEB_SITE\\FCS_WebSite_v2\\wwwroot\\css\\login.css",
       "SourceId": "FCS_WebSite_v2",
       "SourceType": "Discovered",
@@ -1258,6 +1275,23 @@
       "OriginalItemSpec": "wwwroot\\favicon.ico"
     },
     {
+      "Identity": "C:\\Users\\anvar\\Documents\\GitHub\\FCS_WEB_SITE\\FCS_WebSite_v2\\wwwroot\\js\\fileInfo.js",
+      "SourceId": "FCS_WebSite_v2",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\anvar\\Documents\\GitHub\\FCS_WEB_SITE\\FCS_WebSite_v2\\wwwroot\\",
+      "BasePath": "_content/FCS_WebSite_v2",
+      "RelativePath": "js/fileInfo.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\fileInfo.js"
+    },
+    {
       "Identity": "C:\\Users\\anvar\\Documents\\GitHub\\FCS_WEB_SITE\\FCS_WebSite_v2\\wwwroot\\js\\site.js",
       "SourceId": "FCS_WebSite_v2",
       "SourceType": "Discovered",
@@ -1273,6 +1307,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\site.js"
+    },
+    {
+      "Identity": "C:\\Users\\anvar\\Documents\\GitHub\\FCS_WEB_SITE\\FCS_WebSite_v2\\wwwroot\\js\\tableToExcel.js",
+      "SourceId": "FCS_WebSite_v2",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\anvar\\Documents\\GitHub\\FCS_WEB_SITE\\FCS_WebSite_v2\\wwwroot\\",
+      "BasePath": "_content/FCS_WebSite_v2",
+      "RelativePath": "js/tableToExcel.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\tableToExcel.js"
     },
     {
       "Identity": "C:\\Users\\anvar\\Documents\\GitHub\\FCS_WEB_SITE\\FCS_WebSite_v2\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
