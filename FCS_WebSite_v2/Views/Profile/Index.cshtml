@@ -38,7 +38,7 @@
                         @foreach (Event event_ in Model.Item2)
                         {
                             @using (Html.BeginForm("FormWithCurrentEvent", "Profile",
-                           new { eventName = event_.Name }, FormMethod.Post))
+                           new { eventName = event_.Name }, FormMethod.Get))
                             {
                                 <button type="submit" class="list-group-item list-group-item-action"
                             style="margin-top:10px; margin-bottom:10px;">
@@ -77,7 +77,7 @@
                                         </div>
                                     </td>
                                     <td>
-                                        @using (Html.BeginForm("DeleteForm", "Form", new { id = form.Id }, FormMethod.Get))
+                                        @using (Html.BeginForm("DeleteForm", "Form", new { id = form.Id }, FormMethod.Post))
                                         {
                                             <button class="btn btn-outline-danger">
                                                 X

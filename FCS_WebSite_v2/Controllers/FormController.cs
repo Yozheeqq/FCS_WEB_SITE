@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Data.SqlClient.Server;
 using System.Security.Claims;
+using System.Web;
 
 namespace FCS_WebSite_v2.Controllers
 {
@@ -269,13 +270,16 @@ namespace FCS_WebSite_v2.Controllers
         }
 
         [Route("delete/{id}")]
-        [HttpGet]
+        [HttpPost]
         public IActionResult DeleteForm([FromRoute] string id)
         {
             var form = DBObjects.GetForm().Where(x => x.Id == id).First();
             DBObjects.GetForm().Remove(form);
             DBObjects.Content.SaveChanges();
-            return Redirect("/profile");
+
+            string referer = Request.Headers["Referer"].ToString();
+
+            return Redirect(referer);
         }
 
         private void CreateQuestions(IFormCollection fc, string id)

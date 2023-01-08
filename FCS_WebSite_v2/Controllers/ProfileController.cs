@@ -77,8 +77,8 @@ namespace FCS_WebSite_v2.Controllers
             return Redirect("/profile");
         }
 
-        [HttpPost]
-        //[Route("/formforcurevent")]
+        [HttpGet]
+        [Route("{eventName}")]
         public IActionResult FormWithCurrentEvent(string eventName)
         {
             var userId = ((ClaimsIdentity)User.Identity).FindFirst(ClaimTypes.NameIdentifier).Value;
@@ -92,7 +92,11 @@ namespace FCS_WebSite_v2.Controllers
                     First().Id;
             ViewBag.CurrentEventId = eventId;
             var forms = DBObjects.GetForm().Where(x => x.EventId == eventId).ToList();
-            var model = (availableForms, events, forms);
+
+            var allPupils = DBObjects.GetPupil().OrderBy(x => x.LastName).ToList();
+
+            var model = (availableForms, events, forms, allPupils);
+
             return View("Index", model);
         }
     }
