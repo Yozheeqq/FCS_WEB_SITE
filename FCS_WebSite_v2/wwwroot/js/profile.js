@@ -30,7 +30,7 @@ function filter(word) {
     let collection = []
     let hidden = 0
     for (let i = 0; i < length; i++) {
-        if (items[i].value.toLowerCase().startsWith(word)) {
+        if (items[i].value.toLowerCase().indexOf(word) != -1) {
             $(items[i]).show()
         }
         else {
