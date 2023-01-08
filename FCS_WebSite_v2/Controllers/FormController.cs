@@ -169,8 +169,10 @@ namespace FCS_WebSite_v2.Controllers
         [Route("pupil_info")]
         public IActionResult PupilInfo(IFormCollection fc)
         {
-            string firstName = fc["firstName"];
-            string lastName = fc["lastName"];
+            List<string> splitted = fc["pupilInfo"].ToString().Trim().
+                Split(' ', StringSplitOptions.RemoveEmptyEntries).ToList();
+            string? firstName = splitted.Count > 1 ? splitted[1] : null;
+            string? lastName = splitted.Count > 1 ? splitted[0] : null;
             var formQA = DBObjects.GetFormQuestionAnswers();
             var pupils = DBObjects.GetPupil();
             var formQ = DBObjects.GetFormQuestions();

@@ -9,19 +9,29 @@
       "FCS_WebSite_v2/1.0.0": {
         "dependencies": {
           "Angular.UI.Bootstrap": "2.5.0",
+          "Cake.Npm": "2.0.0",
           "Microsoft.AspNetCore.Cryptography.KeyDerivation": "6.0.10",
           "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": "6.0.10",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "6.0.10",
           "Microsoft.AspNetCore.Identity.UI": "6.0.10",
           "Microsoft.EntityFrameworkCore.SqlServer": "6.0.10",
           "Microsoft.EntityFrameworkCore.Tools": "6.0.10",
-          "Microsoft.VisualStudio.Web.CodeGeneration.Design": "6.0.10"
+          "Microsoft.VisualStudio.Web.CodeGeneration.Design": "6.0.10",
+          "Npm": "3.5.2"
         },
         "runtime": {
           "FCS_WebSite_v2.dll": {}
         }
       },
       "Angular.UI.Bootstrap/2.5.0": {},
+      "Cake.Npm/2.0.0": {
+        "runtime": {
+          "lib/net6.0/Cake.Npm.dll": {
+            "assemblyVersion": "0.0.0.0",
+            "fileVersion": "0.0.0.0"
+          }
+        }
+      },
       "Humanizer.Core/2.8.26": {
         "runtime": {
           "lib/netstandard2.0/Humanizer.dll": {
@@ -1396,6 +1406,18 @@
           }
         }
       },
+      "Node.js/0.12.7": {},
+      "NoGit/0.1.0": {
+        "dependencies": {
+          "Node.js": "0.12.7"
+        }
+      },
+      "Npm/3.5.2": {
+        "dependencies": {
+          "NoGit": "0.1.0",
+          "Node.js": "0.12.7"
+        }
+      },
       "NuGet.Common/6.2.1": {
         "dependencies": {
           "NuGet.Frameworks": "6.2.1"
@@ -2339,6 +2361,13 @@
       "path": "angular.ui.bootstrap/2.5.0",
       "hashPath": "angular.ui.bootstrap.2.5.0.nupkg.sha512"
     },
+    "Cake.Npm/2.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-R8bNKCFS/H1VN+mbm/v5Dts7izD0C9YugOG1fy7lWBMP8MMZBvI+b8HtTzKT6QOHUVspu5W77glkiWzPMgzjaA==",
+      "path": "cake.npm/2.0.0",
+      "hashPath": "cake.npm.2.0.0.nupkg.sha512"
+    },
     "Humanizer.Core/2.8.26": {
       "type": "package",
       "serviceable": true,
@@ -2863,6 +2892,27 @@
       "sha512": "sha512-ppPFpBcvxdsfUonNcvITKqLl3bqxWbDCZIzDWHzjpdAHRFfZe0Dw9HmA0+za13IdyrgJwpkDTDA9fHaxOrt20A==",
       "path": "newtonsoft.json/13.0.1",
       "hashPath": "newtonsoft.json.13.0.1.nupkg.sha512"
+    },
+    "Node.js/0.12.7": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-15c78ckXi3Zv6FWU5/1XrcIPiE+a+oK3xZLAEAHXWbHv2dy/ILBG2qGFPGW92dei3/JJ11mHWhB941tQ465A6w==",
+      "path": "node.js/0.12.7",
+      "hashPath": "node.js.0.12.7.nupkg.sha512"
+    },
+    "NoGit/0.1.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-NJY9sH90rT75WF3fAf832poUntcnw+zLGxk1fQR01efWj+eLEpvLbXtLyY4V0Gr07avyJByvrewyqbf01MhJCQ==",
+      "path": "nogit/0.1.0",
+      "hashPath": "nogit.0.1.0.nupkg.sha512"
+    },
+    "Npm/3.5.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Jj3UFTTDCAP38rhGvwMe+Wv5hbPjBwePzvwtX69CeEtZ9uiIWKGiZdvpGV0JGlti2INa7k7DuL1uRaOlQunA8w==",
+      "path": "npm/3.5.2",
+      "hashPath": "npm.3.5.2.nupkg.sha512"
     },
     "NuGet.Common/6.2.1": {
       "type": "package",

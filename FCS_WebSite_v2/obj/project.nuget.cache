@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "wIER0NTomgPf18OEBoC9IPQYzslrk5k57xqnKmfbPZ/i3mAuOodQcCeKd1+5b5rP9Y3yivusZ5xKYBDoFhH7GQ==",
+  "dgSpecHash": "xWiwN6JwBdMk9vSqM/DtQSf/XgkNL87+CS8JhBKJwFdjhRK17vvBrlb+7LX7YR17IE/3uPmk2db9EQCeIPQ3Dw==",
   "success": true,
   "projectFilePath": "C:\\Users\\anvar\\Documents\\GitHub\\FCS_WEB_SITE\\FCS_WebSite_v2\\FCS_WebSite_v2.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\anvar\\.nuget\\packages\\angular.ui.bootstrap\\2.5.0\\angular.ui.bootstrap.2.5.0.nupkg.sha512",
+    "C:\\Users\\anvar\\.nuget\\packages\\cake.npm\\2.0.0\\cake.npm.2.0.0.nupkg.sha512",
     "C:\\Users\\anvar\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\anvar\\.nuget\\packages\\messagepack\\2.1.152\\messagepack.2.1.152.nupkg.sha512",
     "C:\\Users\\anvar\\.nuget\\packages\\messagepack.annotations\\2.1.152\\messagepack.annotations.2.1.152.nupkg.sha512",
@@ -80,6 +81,9 @@
     "C:\\Users\\anvar\\.nuget\\packages\\microsoft.win32.systemevents\\6.0.0\\microsoft.win32.systemevents.6.0.0.nupkg.sha512",
     "C:\\Users\\anvar\\.nuget\\packages\\netstandard.library\\1.6.1\\netstandard.library.1.6.1.nupkg.sha512",
     "C:\\Users\\anvar\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
+    "C:\\Users\\anvar\\.nuget\\packages\\node.js\\0.12.7\\node.js.0.12.7.nupkg.sha512",
+    "C:\\Users\\anvar\\.nuget\\packages\\nogit\\0.1.0\\nogit.0.1.0.nupkg.sha512",
+    "C:\\Users\\anvar\\.nuget\\packages\\npm\\3.5.2\\npm.3.5.2.nupkg.sha512",
     "C:\\Users\\anvar\\.nuget\\packages\\nuget.common\\6.2.1\\nuget.common.6.2.1.nupkg.sha512",
     "C:\\Users\\anvar\\.nuget\\packages\\nuget.configuration\\6.2.1\\nuget.configuration.6.2.1.nupkg.sha512",
     "C:\\Users\\anvar\\.nuget\\packages\\nuget.dependencyresolver.core\\5.11.0\\nuget.dependencyresolver.core.5.11.0.nupkg.sha512",

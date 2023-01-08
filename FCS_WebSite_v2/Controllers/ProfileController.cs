@@ -40,7 +40,9 @@ namespace FCS_WebSite_v2.Controllers
                            FormId = af.Id
                        };
 
-            var model = (customForm, events, allForms);
+            var allPupils = DBObjects.GetPupil().OrderBy(x => x.LastName).ToList();
+
+            var model = (customForm, events, allForms, allPupils);
 
             return View(model);
         }
