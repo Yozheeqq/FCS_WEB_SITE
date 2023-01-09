@@ -43,15 +43,29 @@
     </nav>
     -->
 
+    <div class="container">
+        <div class="row">
+            <div class="col">
+
+            </div>
+            <div class="col">
+                <a class="button nav-link text-dark" asp-area="Identity" asp-page="/Account/Login"
+                   id="first">
+                    Войти
+                </a>
+                <a class="button nav-link text-dark" asp-area="Identity"
+                   id=second data-toggle="modal" data-target="#popup">
+                    Зарегистрироваться
+                </a>
+            </div>
+            <div class="col">
+
+            </div>
+        </div>
+    </div>
+
     <nav class="block_of_buttons">
-        <a class="button nav-link text-dark" asp-area="Identity" asp-page="/Account/Login" 
-            id="first">
-            Войти
-        </a>
-        <a class="button nav-link text-dark" asp-area="Identity"
-            id=second data-toggle="modal" data-target="#popup">
-            Зарегистрироваться
-        </a>
+        
     </nav>
 
     <div class="modal fade" id="popup">

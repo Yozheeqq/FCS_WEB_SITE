@@ -4,26 +4,47 @@
 @inject UserManager<User> UserManager
 
 <ul class="navbar-nav">
-@if (SignInManager.IsSignedIn(User))
-{
-    <li class="nav-item">
-        <a  class="nav-link text-dark" href="/Profile" title="Manage">Мой профиль</a>
-    </li>
-    <li class="nav-item">
-        <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/")" method="get" >
-            <button  type="submit" class="nav-link btn btn-link text-dark">
-                Выйти
-            </button>
-        </form>
-    </li>
-}
-else
-{
-    <li class="nav-item">
-        <a class="nav-link text-dark" href="/Registration">Регистрация</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Войти</a>
-    </li>
-}
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" href="/Profile" title="Manage">Мой профиль</a>
+        </li>
+        <li class="nav-item">
+            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/")" method="get">
+                <button type="submit" class="nav-link btn btn-link text-dark">
+                    Выйти
+                </button>
+            </form>
+        </li>
+    }
+    else
+    {
+        <li class="nav-item">
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Регистрация
+                </button>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a class="nav-link text-dark" asp-area="Identity"
+                            asp-page="/Account/RegisterPupil">
+                            Как ученик
+                        </a>
+                    </li>
+                    <li>
+                        <a a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/RegisterTeacher">
+                            Как преподаватель
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </li>
+        <li class="nav-item">
+            <a class="btn btn-secondary" asp-area="Identity" 
+                asp-page="/Account/Login" role="button"
+                aria-expanded="false" style="margin-left: 15px;">
+                Войти
+            </a>
+        </li>
+    }
 </ul>
