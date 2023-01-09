@@ -5,6 +5,7 @@
     margin-bottom: 20px;
     margin-left: auto;
     margin-right: auto;
+    margin-top: 20px;
     display: block
 }
 
@@ -25,4 +26,8 @@
 
 .heading {
     text-align: center;
+}
+
+.form-floating {
+    margin-bottom: 10px;
 }
