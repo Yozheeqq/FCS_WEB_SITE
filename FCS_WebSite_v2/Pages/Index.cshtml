@@ -7,23 +7,24 @@
     Layout = "_Layout";
 }
 <head>
-
+    <link rel="stylesheet" href="~/css/startPage.css"/>
 </head>
 <body>
     <form method="post">
         <div class="container">
             @foreach (var event_ in Model.Events)
             {
-                <div class="row">
+                <div class="row" style="margin-bottom: 10px;">
                     <div class="col border border-1">
                         @event_.Name
                     </div>
-                    <div class="col border border-1">
-                    </div>
-                    <div class="col border border-1">
+                    <div class="col border border-1 centered-container">
                         <button type="submit" class="btn btn-primary" asp-route-eventId="@event_.Id">
                             Зарегистрироваться
                         </button>
+                    </div>
+                    <div class="col">
+                        
                     </div>
                 </div>
             }

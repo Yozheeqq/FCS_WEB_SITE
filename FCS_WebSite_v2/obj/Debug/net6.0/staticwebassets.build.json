@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "o1K/feC1zOIjsrLvGqgL8zIkIfHJD6fcfOvTD4CLV14=",
+  "Hash": "RlvoC6ieLo6X5YKOfLQjwwSxSVT0VMhptB4uvQhMb7w=",
   "Source": "FCS_WebSite_v2",
   "BasePath": "_content/FCS_WebSite_v2",
   "Mode": "Default",
@@ -1256,6 +1256,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\site.css"
+    },
+    {
+      "Identity": "C:\\Users\\anvar\\Documents\\GitHub\\FCS_WEB_SITE\\FCS_WebSite_v2\\wwwroot\\css\\startPage.css",
+      "SourceId": "FCS_WebSite_v2",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\anvar\\Documents\\GitHub\\FCS_WEB_SITE\\FCS_WebSite_v2\\wwwroot\\",
+      "BasePath": "_content/FCS_WebSite_v2",
+      "RelativePath": "css/startPage.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\startPage.css"
     },
     {
       "Identity": "C:\\Users\\anvar\\Documents\\GitHub\\FCS_WEB_SITE\\FCS_WebSite_v2\\wwwroot\\css\\teacher.css",
