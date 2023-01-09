@@ -229,6 +229,13 @@ namespace FCS_WebSite_v2.Controllers
             string formId = fc["availableForms"];
             string eventName = fc["availableEvents"];
 
+            // Если вдруг форма или меро пустое, то возвращаемся назад
+            if (formId == null || eventName == null)
+            {
+                string referer = Request.Headers["Referer"].ToString();
+                return Redirect(referer);
+            }
+
             Form copyForm = DBObjects.GetForm().Where(x => x.Id == formId).Single();
             Event @event = DBObjects.GetEvents().Where(x => x.Name == eventName).Single();
 
