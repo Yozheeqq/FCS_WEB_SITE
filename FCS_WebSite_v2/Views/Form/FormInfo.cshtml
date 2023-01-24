@@ -29,32 +29,36 @@
             <tbody>
                 @{
                     int index = 0;
+                    // Список отдельных учеников
                     var certainPupil = new[] {
                         new {
                             LastName = "", FirstName = "", Answers = new List<string>(), 
                             Time = DateTime.Now
                         }
                     }.ToList();
-                    foreach (var pupil in Model.Item1)
+                    foreach (var pupilKey in Model.Item1)
                     {
+                        // Список всех ответов отдельного ученика
                         List<string> answers = new List<string>();
-                        foreach (var answer in pupil)
+                        foreach (var pupilInfo in pupilKey)
                         {
-                            answers.Add(answer.Answers);
+                            answers.Add(pupilInfo.Answers);
                         }
                         int stop = 0;
-                        foreach (var item in pupil)
+                        foreach (var pupilInfo in pupilKey)
                         {
+                            // Тут костыль, т.е. по циклу проходимся 1 раз
                             if (stop == 1)
                             {
                                 break;
                             }
+                            // Добавляем в список всех учеников нового ученика
                             certainPupil.Add(new
                             {
-                                LastName = (string)(item.LastName),
-                                FirstName = (string)(item.FirstName),
+                                LastName = (string)(pupilInfo.LastName),
+                                FirstName = (string)(pupilInfo.FirstName),
                                 Answers = answers,
-                                Time = (DateTime)(item.Time)
+                                Time = (DateTime)(pupilInfo.Time)
                             });
                             stop++;
                         }
