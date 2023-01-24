@@ -208,17 +208,38 @@ namespace FCS_WebSite_v2.Controllers
             var formQA = DBObjects.GetFormQuestionAnswers();
             var pupils = DBObjects.GetPupil();
             var formQ = DBObjects.GetFormQuestions();
-            var formInfo = from fqa in formQA
-                        join p in pupils on fqa.UserId equals p.Id
-                        join fq in formQ on fqa.QuestionId equals fq.Id
-                        where fq.FormId == id
-                        select new {FirstName = p.FirstName, LastName = p.LastName, 
-                                    Question = fq.Content, Answers = fqa.Answers};
-            string? formName = DBObjects.GetForm().Where(x => x.Id == id).FirstOrDefault()?.Name;
+            var formInfo = (from fqa in formQA
+                           join p in pupils on fqa.UserId equals p.Id
+                           join fq in formQ on fqa.QuestionId equals fq.Id
+                           where fq.FormId == id
+                           select new
+                           {
+                               FirstName = p.FirstName,
+                               LastName = p.LastName,
+                               Question = fq.Content,
+                               Answers = fqa.Answers,
+                               Time = fqa.FormTime
+                           }).ToList();
+            // Сгруппированно по фио и времени прохождения формы
+            // Key: LastName, FirstName, Time
+            // Value: LastName, FirstName, Question, Answer, Time
+
+            // FLT - FirstName, LastName, Time
+            var groupedPupilsByFLT = formInfo.GroupBy(x => new { x.LastName, x.FirstName, x.Time.Date}).
+                Select(x => x.OrderBy(x => x.Question)).ToList();
+
+            // Сортируем все вопросы, чтобы везде был одинаковый порядок
+            List<string> formQuestions = (from fq in formQ
+                                          where fq.FormId == id && fq.Content != ""
+                                          orderby fq.Content
+                                          select fq.Content).ToList();
+
+
+            string ? formName = DBObjects.GetForm().Where(x => x.Id == id).FirstOrDefault()?.Name;
+
             // Таблица с данными + название формы
-            var model = (formInfo, formName);
+            var model = (groupedPupilsByFLT, formName, formQuestions);
             // Текущая форма, откуда будем получать информацию
-            // Pupil.FirstName, Pupil.LastName, FormQuestion.Content, FormQuestionAnswers.Answer
             return View(model);
         }
 

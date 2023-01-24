@@ -3,7 +3,7 @@
 }
 
 <head>
-    <link rel="stylesheet" href="~/css/form/forminfo.css"/>
+    <link rel="stylesheet" href="~/css/form/forminfo.css" />
     <script type="text/javascript" src="~/js/tableToExcel.js"></script>
 </head>
 <body>
@@ -19,23 +19,63 @@
                     <th scope="col">#</th>
                     <th scope="col">Фамилия</th>
                     <th scope="col">Имя</th>
-                    <th scope="col">Вопрос</th>
-                    <th scope="col">Ответы</th>
+                    <th scope="col">Время</th>
+                    @foreach (var content in Model.Item3)
+                    {
+                        <th scope="col">@(content)</th>
+                    }
                 </tr>
             </thead>
             <tbody>
                 @{
-                    int index = 1;
+                    int index = 0;
+                    var certainPupil = new[] {
+                        new {
+                            LastName = "", FirstName = "", Answers = new List<string>(), 
+                            Time = DateTime.Now
+                        }
+                    }.ToList();
+                    foreach (var pupil in Model.Item1)
+                    {
+                        List<string> answers = new List<string>();
+                        foreach (var answer in pupil)
+                        {
+                            answers.Add(answer.Answers);
+                        }
+                        int stop = 0;
+                        foreach (var item in pupil)
+                        {
+                            if (stop == 1)
+                            {
+                                break;
+                            }
+                            certainPupil.Add(new
+                            {
+                                LastName = (string)(item.LastName),
+                                FirstName = (string)(item.FirstName),
+                                Answers = answers,
+                                Time = (DateTime)(item.Time)
+                            });
+                            stop++;
+                        }
+                    }
+
                 }
-                @foreach (var pupil in Model.Item1)
+                @foreach (var pupil in certainPupil)
                 {
-                    <tr>
-                        <th data-t="n" scope="row">@index</th>
-                        <td>@pupil.LastName</td>
-                        <td>@pupil.FirstName</td>
-                        <td>@pupil.Question</td>
-                        <td>@pupil.Answers</td>
-                    </tr>
+                    if (index != 0)
+                    {
+                        <tr>
+                            <th data-t="n" scope="row">@index</th>
+                            <td>@(pupil.LastName)</td>
+                            <td>@pupil.FirstName</td>
+                            <td>@pupil.Time</td>
+                            @foreach (string answer in pupil.Answers)
+                            {
+                                <td>@answer</td>
+                            }
+                        </tr>
+                    }
                     index++;
                 }
             </tbody>
