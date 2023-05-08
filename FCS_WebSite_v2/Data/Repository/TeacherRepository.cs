@@ -13,9 +13,9 @@ namespace FCS_WebSite_v2.Data.Repository
             this.dBContent = dBContent;
         }
 
-        public IEnumerable<Teacher> Pupils => dBContent.Teacher.Include(teacher => teacher.Id);
+        public IEnumerable<Teacher> Teachers => dBContent.Teacher.Include(teacher => teacher.Id);
 
-        public Teacher? GetObjPupil(int id) =>
+        public Teacher? GetObjTeacher(int id) =>
             dBContent.Teacher.FirstOrDefault(teacher => teacher.Id == id.ToString());
 
     }

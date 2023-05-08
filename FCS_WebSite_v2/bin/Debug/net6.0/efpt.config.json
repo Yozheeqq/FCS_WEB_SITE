@@ -1,0 +1,73 @@
+﻿{
+   "CodeGenerationMode": 2,
+   "ContextClassName": "websiteContext",
+   "ContextNamespace": null,
+   "DefaultDacpacSchema": null,
+   "FilterSchemas": false,
+   "IncludeConnectionString": false,
+   "ModelNamespace": null,
+   "OutputContextPath": null,
+   "OutputPath": "Models",
+   "PreserveCasingWithRegex": true,
+   "ProjectRootNamespace": "FCS_WebSite_v2",
+   "Schemas": null,
+   "SelectedHandlebarsLanguage": 0,
+   "SelectedToBeGenerated": 0,
+   "Tables": [
+      {
+         "Name": "[Identity].[Event]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Identity].[Form]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Identity].[FormQuestion]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Identity].[FormQuestionAnswer]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Identity].[QuestionType]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Identity].[Role]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Identity].[User]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Identity].[UserEvent]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Identity].[UserRoles]",
+         "ObjectType": 0
+      }
+   ],
+   "UiHint": "C:\\Users\\anvar\\Downloads\\website.dacpac",
+   "UncountableWords": null,
+   "UseBoolPropertiesWithoutDefaultSql": false,
+   "UseDatabaseNames": false,
+   "UseDateOnlyTimeOnly": false,
+   "UseDbContextSplitting": false,
+   "UseFluentApiOnly": true,
+   "UseHandleBars": false,
+   "UseHierarchyId": false,
+   "UseInflector": false,
+   "UseLegacyPluralizer": false,
+   "UseManyToManyEntity": false,
+   "UseNoDefaultConstructor": false,
+   "UseNoObjectFilter": false,
+   "UseNodaTime": false,
+   "UseNullableReferences": false,
+   "UseSchemaFolders": false,
+   "UseSpatial": false,
+   "UseT4": false
+}

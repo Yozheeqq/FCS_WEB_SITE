@@ -21,7 +21,7 @@
     <body>
         <div class="container">
             <div class="row">
-                <div class="col border border-1">
+                <div class="col">
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" id="isRegistration" name="isRegistration">
                         <label class="form-check-label" for="isRegistration">
@@ -31,7 +31,7 @@
                 </div>
                 <div class="col-7">
                     <div class="row">
-                        <div class="col border border-1">
+                        <div class="col">
                             @if (Model.Item1.Name != null)
                             {
                                 <input type="text" class="form-control" id="formname" name="formname" value="@Model.Item1.Name" />
@@ -39,7 +39,7 @@
                                 <input type="text" class="form-control" id="formname" name="formname" value="Название" />
                             }
                         </div>
-                        <div class="col border border-1">
+                        <div class="col">
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" id="ifdate" name="ifdate"
                                    />
@@ -83,7 +83,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col border border-1">
+                <div class="col">
                     <div class="date" id="date">
                         <input type="date" id="startDate" name="startDate" />
                         <input type="date" id="endDate" name="endDate" onchange="ifDateMore()" />
@@ -91,16 +91,16 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col border border-1">
+                <div class="col">
                 </div>
-                <div class="col-7 border border-1 justify-content-center text-center">
+                <div class="col-7 justify-content-center text-center">
                     <div class="questions" id="question">
                         @foreach (FormQuestion formQuestion in Model.Item2)
                         {
                             string questionId = formQuestion.Id.Split(";;")[0].Split("_")[1];
                             <div id="questionPlace_@questionId" name="place_@questionId">
                                 <div class="row">
-                                    <div class="col border border-1">
+                                    <div class="col">
                                         <div class="row">
                                             <input type="text" id="question_@questionId" class="form-control" placeholder="Вопрос"
                                            value="" name="questionInput_@questionId" />
@@ -180,7 +180,7 @@
                                         </script>
                                     </div>
                                 
-                                    <div class="col-4 border border-1 justify-content-center text-center">
+                                    <div class="col-4 justify-content-center text-center">
                                     <select id="select_@questionId" name="select_@questionId"
                                         onchange="selectOnChange(@questionId)">
                                         <option value="0">Короткий ответ</option>
@@ -239,21 +239,21 @@
                         +
                     </button>
                 </div>
-                <div class="col border border-1">
+                <div class="col">
                 </div>
             </div>
             <div class="row" style="height: 100px">
-                <div class="col border border-1"></div>
-                <div class="col border border-1"></div>
-                <div class="col border border-1 text-center" style="justify-content: center; display: block;">
+                <div class="col"></div>
+                <div class="col"></div>
+                <div class="col text-center" style="justify-content: center; display: block;">
 
                     <button class="btn btn-outline-primary" type="submit" name="saveForm"
                         style="margin-top:15%;">
                         Сохранить
                     </button>
                 </div>
-                <div class="col border border-1"></div>
-                <div class="col border border-1"></div>
+                <div class="col"></div>
+                <div class="col"></div>
             </div>
         </div>
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -324,8 +324,8 @@
                 place.setAttribute("name", "place_" + idForAll)
                 let questionTypePlace = document.createElement("div");
                 let questionPlace = document.createElement("div");
-                questionPlace.setAttribute("class", "col border border-1");
-                questionTypePlace.setAttribute("class", "col-4 border border-1 justify-content-center text-center");
+                questionPlace.setAttribute("class", "col");
+                questionTypePlace.setAttribute("class", "col-4 justify-content-center text-center");
                 let question = document.createElement("div");
                 let answer = document.createElement("div");
                 question.setAttribute("class", "row");
